@@ -1,0 +1,15 @@
+# Package Files #
+*.jar
+
+# Other Files
+.gradle/
+.idea/compiler.xml
+.idea/copyright/
+.idea/gradle.xml
+.idea/misc.xml
+.idea/workspace.xml
+build/
+local.properties
+app/libs/
+app/src/main/res/drawable/
+app/src/test/
