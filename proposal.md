@@ -1,27 +1,9 @@
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-
 <h1>Proposal KAreg</h1>
 
 <p>This file explaines how our App "KAreg" will look like, how much time we plan to invest and how much would be the equivalent value in Euro.</p>
 
 <h2>Paper Prototype</h2>
-<img src="project_management/Entwurf%20KAreg.pdf">
+<a href="project_management/Entwurf%20KAreg.pdf">Hyperlink to Paper Prototype</a>
 
 <h2>Time Estimation</h2>
 
@@ -67,6 +49,12 @@ tr:nth-child(even) {
     <td>450€</td>
   </tr>
 </table>
+
+<p>
+<b>Total Hours:</b> 85 <br>
+<b>Total Euro (without Tax):</b> 3825€
+<b>Total Euro (incl 20% Tax):</b> 4590€
+</p>
 
 
 TBD
