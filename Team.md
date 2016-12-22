@@ -1,7 +1,7 @@
-Team
+<h1>Team</h1>
 Name : Role
 
-Martin Haring : Activity Programmer, Code Owner
-Markus Skergeth : Project Management, Testing, Projekt Leader
-Michaela Stangl : Design, View Programmer
-Sabine Gollinger : Sqlite database work
+<b>Martin Haring</b> : Activity Programmer, Code Owner
+<b>Markus Skergeth</b> : Project Management, Testing, Projekt Leader
+<b>Michaela Stangl</b> : Design, View Programmer
+<b>Sabine Gollinger</b> : Sqlite database work
