@@ -56,10 +56,3 @@
 <b>Total Euro (incl 20% Tax):</b> 4590€
 </p>
 
-
-TBD
-WIP
-
-
-
-
