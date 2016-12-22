@@ -52,7 +52,7 @@
 
 <p>
 <b>Total Hours:</b> 85 <br>
-<b>Total Euro (without Tax):</b> 3825€
+<b>Total Euro (without Tax):</b> 3825€ <br>
 <b>Total Euro (incl 20% Tax):</b> 4590€
 </p>
 
