@@ -117,30 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView8"
-                    android:layout_weight="1"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="date"
-                    android:ems="10"
-                    android:id="@+id/editText2"
-                    android:layout_weight="1"
-                    tools:text="31.12.2016" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:text="Geburtsort"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView9"
-                    android:layout_weight="2"
+                    android:layout_weight="1.8"
                     android:textSize="18sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp" />
@@ -173,6 +150,29 @@
                         android:layout_marginTop="10dp" />
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Geburtsort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView18"
+                    android:layout_weight="1"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/eT_gebOrt"
+                    android:layout_weight="1"
+                    tools:text="Geburtsort" />
             </LinearLayout>
 
             <LinearLayout
@@ -285,7 +285,7 @@
                     android:text="ZURÜCK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button"
+                    android:id="@+id/b_zurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp" />
 
@@ -293,15 +293,10 @@
                     android:text="WEITER"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/button2"
+                    android:id="@+id/b_weiter"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp" />
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></LinearLayout>
 
         </LinearLayout>
 
