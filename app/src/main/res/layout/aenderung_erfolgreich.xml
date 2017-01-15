@@ -42,7 +42,8 @@
             android:id="@+id/b_weiter"
             android:layout_marginBottom="20dp"
             android:textSize="18sp"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="50dp"
+            android:onClick="gotoMain" />
 
     </LinearLayout>
 </RelativeLayout>

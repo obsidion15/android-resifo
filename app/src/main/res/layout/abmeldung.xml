@@ -245,7 +245,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/b_abZurueck"
                     android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="5dp"
+                    android:onClick="gotoHauptwohnsitz" />
 
                 <Button
                     android:text="WEITER"
@@ -253,7 +254,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/b_abWeiter"
                     android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="5dp"
+                    android:onClick="gotoErfolgreich" />
             </LinearLayout>
 
         </LinearLayout>

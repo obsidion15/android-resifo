@@ -41,14 +41,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/b_new"
             android:layout_marginBottom="20dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="gotoPersoenlicheDaten" />
 
         <Button
             android:text="BEARBEITEN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/b_edit"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:onClick="gotoBearbeiten" />
 
         <TextView
             android:text="Impressum"
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
             android:textAlignment="center"
-            android:layout_marginTop="175dp" />
+            android:layout_marginTop="175dp"
+            android:onClick="gotoImpressum" />
     </LinearLayout>
 </RelativeLayout>
