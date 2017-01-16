@@ -42,7 +42,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/b_editPers"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:onClick="gotoPersoenlicheDaten" />
 
             </LinearLayout>
 
@@ -270,7 +271,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/b_editAn"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="gotoAnmeldung" />
 
                 </LinearLayout>
 
@@ -522,7 +524,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/b_editHws"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="gotoHauptwohnsitz" />
 
                 </LinearLayout>
 
@@ -710,7 +713,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/b_editAb"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:onClick="gotoAbmeldung" />
 
                 </LinearLayout>
 
