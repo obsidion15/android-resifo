@@ -216,21 +216,21 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
+                <RadioButton
                     android:text="ja"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_abAuslandJa"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:id="@+id/rB_abAuslandJa"
+                    android:layout_weight="1" />
 
-                <CheckBox
+                <RadioButton
                     android:text="nein"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_abAuslandNein"
+                    android:id="@+id/rb_abAuslandNein"
                     android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:elevation="0dp" />
+
             </LinearLayout>
 
             <LinearLayout
