@@ -216,21 +216,20 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
+                <RadioButton
                     android:text="ja"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_anAuslandJa"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:id="@+id/rB_anAuslandJa"
+                    android:layout_weight="1" />
 
-                <CheckBox
+                <RadioButton
                     android:text="nein"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_anAuslandNein"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:id="@+id/rB_anAuslandNein"
+                    android:layout_weight="1" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -247,21 +246,20 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
+                <RadioButton
                     android:text="ja"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_anHWSJa"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:id="@+id/rB_anHWSJa"
+                    android:layout_weight="1" />
 
-                <CheckBox
+                <RadioButton
                     android:text="nein"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_anHWSNein"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:id="@+id/rB_anHWSNein"
+                    android:layout_weight="1" />
+
             </LinearLayout>
 
 

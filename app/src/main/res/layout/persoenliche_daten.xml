@@ -178,7 +178,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
 
                 <TextView
                     android:text="Geschlecht"
@@ -189,21 +190,20 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
+                <RadioButton
                     android:text="männlich"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_m"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:id="@+id/rB_m"
+                    android:layout_weight="1" />
 
-                <CheckBox
+                <RadioButton
                     android:text="weiblich"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_w"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:id="@+id/rB_w"
+                    android:layout_weight="1" />
+
             </LinearLayout>
 
             <LinearLayout
