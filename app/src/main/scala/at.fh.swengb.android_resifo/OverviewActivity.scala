@@ -34,4 +34,9 @@ class OverviewActivity extends Activity{
     val i = new Intent(this, classOf[AbmeldungActivity])
     startActivity(i)
   }
+
+  def gotoErfolgreich(view:View): Unit ={
+    val i = new Intent(this, classOf[ErfolgreichActivity])
+    startActivity(i)
+  }
 }

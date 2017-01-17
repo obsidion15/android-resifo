@@ -6,7 +6,7 @@ import android.database.sqlite.{SQLiteDatabase, SQLiteOpenHelper}
 /**
   * Created by Sabine on 16.01.2017.
   */
-case class db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 1) {
+case class Db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 1) {
 
   override def onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int): Unit = ()
 

@@ -21,6 +21,7 @@
         <activity android:name=".AbmeldungActivity" ></activity>
         <activity android:name=".ErfolgreichActivity" ></activity>
         <activity android:name=".BearbeitenActivity" ></activity>
+        <activity android:name=".OverviewActivity" ></activity>
         <activity android:name=".ImpressumActivity" ></activity>
     </application>
 
