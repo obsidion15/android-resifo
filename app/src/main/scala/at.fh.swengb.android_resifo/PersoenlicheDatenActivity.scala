@@ -86,13 +86,13 @@ class PersoenlicheDatenActivity extends Activity{
 
     var someCursor: Option[Cursor] = None
     try {
-      someCursor = Option(db.getReadableDatabase.query("person", Array("id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
+      someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
         case Some(c) =>
           while (c.moveToNext()) {
-            val id = c.getInt(c.getColumnIndex("id"))
+            val id = c.getInt(c.getColumnIndex("person_id"))
             val nachname = c.getString(c.getColumnIndex("nachname"))
             val vorname = c.getString(c.getColumnIndex("vorname"))
             val nachnameAlt = c.getString(c.getColumnIndex("nachnameAlt"))
@@ -102,7 +102,7 @@ class PersoenlicheDatenActivity extends Activity{
             val religion = c.getString(c.getColumnIndex("religion"))
             val familienstand = c.getString(c.getColumnIndex("familienstand"))
             val staatsangehoerigkeit = c.getString(c.getColumnIndex("staatsangehoerigkeit"))
-            println(s"ID($id) : $nachname ($nachnameAlt) $vorname, geboren am $geburtsdatum in $geburtsort, Geschlecht: $geschlecht, $religion, $familienstand, $staatsangehoerigkeit")
+            println(s"ID($id): $nachname ($nachnameAlt) $vorname, geboren am $geburtsdatum in $geburtsort, Geschlecht: $geschlecht, $religion, $familienstand, $staatsangehoerigkeit")
           }
       }
 
