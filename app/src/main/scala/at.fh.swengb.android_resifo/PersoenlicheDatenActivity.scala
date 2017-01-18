@@ -5,7 +5,7 @@ import android.app.Activity
 import android.content.{ContentValues, Intent}
 import android.database.Cursor
 import android.view.View
-import android.widget.{EditText, Spinner}
+import android.widget.{EditText, RadioButton, Spinner}
 
 /**
   * Created by Martin on 15.01.2017.
@@ -29,7 +29,8 @@ class PersoenlicheDatenActivity extends Activity{
     val s_gebMonat = findViewById(R.id.s_gebMonat).asInstanceOf[Spinner]
     val s_gebJahr = findViewById(R.id.s_gebJahr).asInstanceOf[Spinner]
     val eT_gebOrt = findViewById(R.id.eT_gebOrt).asInstanceOf[EditText]
-    val rb_geschlecht = ???
+    val rb_m = findViewById(R.id.rB_m).asInstanceOf[RadioButton]
+//    val rb_w = findViewById(R.id.rB_w).asInstanceOf[RadioButton]
     val s_religion = findViewById(R.id.s_religion).asInstanceOf[Spinner]
     val s_famStand = findViewById(R.id.s_famStand).asInstanceOf[Spinner]
     val s_staat = findViewById(R.id.s_staat).asInstanceOf[Spinner]
@@ -51,7 +52,7 @@ class PersoenlicheDatenActivity extends Activity{
       case (k, v) => cv.put(k, v)
     }
 
-    val geburtsdatum = ???
+    val geburtsdatum: String = s_gebTag.getSelectedItem().toString() + "." + s_gebMonat.getSelectedItem().toString() + "." + s_gebJahr.getSelectedItem().toString()
     Map("geburtsdatum" -> geburtsdatum) foreach {
       case (k, v) => cv.put(k, v)
     }
@@ -61,22 +62,22 @@ class PersoenlicheDatenActivity extends Activity{
       case (k, v) => cv.put(k, v)
     }
 
-    val geschlecht: String = ???
+    val geschlecht: String = if (rb_m.isChecked == true) "m" else "w"
     Map("geschlecht" -> geschlecht) foreach {
       case (k, v) => cv.put(k, v)
     }
 
-    val religion: String = ???
+    val religion: String = s_religion.getSelectedItem().toString()
     Map("religion" -> religion) foreach {
       case (k, v) => cv.put(k, v)
     }
 
-    val familienstand: String = ???
+    val familienstand: String = s_famStand.getSelectedItem().toString()
     Map("familienstand" -> familienstand) foreach {
       case (k, v) => cv.put(k, v)
     }
 
-    val staatsangehoerigkeit: String = ???
+    val staatsangehoerigkeit: String = s_staat.getSelectedItem().toString()
     Map("staatsangehoerigkeit" -> staatsangehoerigkeit) foreach {
       case (k, v) => cv.put(k, v)
     }
@@ -101,7 +102,7 @@ class PersoenlicheDatenActivity extends Activity{
             val religion = c.getString(c.getColumnIndex("religion"))
             val familienstand = c.getString(c.getColumnIndex("familienstand"))
             val staatsangehoerigkeit = c.getString(c.getColumnIndex("staatsangehoerigkeit"))
-            println(s"ID($id) : $nachname ($nachnameAlt) $vorname, geboren am $geburtsdatum in $geburtsort, $geschlecht, $religion, $familienstand, $staatsangehoerigkeit")
+            println(s"ID($id) : $nachname ($nachnameAlt) $vorname, geboren am $geburtsdatum in $geburtsort, Geschlecht: $geschlecht, $religion, $familienstand, $staatsangehoerigkeit")
           }
       }
 
