@@ -94,14 +94,13 @@ class HauptwohnsitzActivity extends Activity{
     }
   }
 
-  def gotoAnmeldung(view:View): Unit ={
-    val i = new Intent(this, classOf[AnmeldungActivity])
-    startActivity(i)
-  }
-
   def gotoAbmeldung(view:View): Unit ={
     val i = new Intent(this, classOf[AbmeldungActivity])
     startActivity(i)
+  }
+
+  def goBack(view:View): Unit ={
+    finish()
   }
 
 }

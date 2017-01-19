@@ -15,14 +15,13 @@ class AnmeldungActivity extends Activity{
     setContentView(R.layout.anmeldung)
   }
 
-  def gotoPersoenlicheDaten(view:View): Unit ={
-    val i = new Intent(this, classOf[PersoenlicheDatenActivity])
-    startActivity(i)
-  }
-
   def gotoHauptwohnsitz(view:View): Unit ={
     val i = new Intent(this, classOf[HauptwohnsitzActivity])
     startActivity(i)
+  }
+
+  def goBack(view:View): Unit ={
+    finish()
   }
 
 }

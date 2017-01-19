@@ -190,20 +190,27 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <RadioButton
-                    android:text="männlich"
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:layout_width="205dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rB_m"
-                    android:layout_weight="1"
-                    android:checked="true" />
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:text="weiblich"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rB_w"
-                    android:layout_weight="1" />
+                    <RadioButton
+                        android:text="männlich"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_m"
+                        android:layout_weight="1"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:text="weiblich"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_w"
+                        android:layout_weight="1" />
+
+                </RadioGroup>
 
             </LinearLayout>
 
@@ -289,7 +296,7 @@
                     android:id="@+id/b_zurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoMain" />
+                    android:onClick="goBack" />
 
                 <Button
                     android:text="WEITER"

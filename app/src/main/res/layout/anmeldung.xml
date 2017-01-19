@@ -301,7 +301,7 @@
                     android:id="@+id/b_anZurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoPersoenlicheDaten" />
+                    android:onClick="goBack" />
 
                 <Button
                     android:text="WEITER"

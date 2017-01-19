@@ -112,14 +112,13 @@ class PersoenlicheDatenActivity extends Activity{
   }
 
   def gotoAnmeldung(view:View): Unit ={
-    saveData(view)
+//    saveData(view)
     val i = new Intent(this, classOf[AnmeldungActivity])
     startActivity(i)
   }
 
-  def gotoMain(view:View): Unit ={
-    val i = new Intent(this, classOf[MainActivity])
-    startActivity(i)
+  def goBack(view:View): Unit ={
+    finish()
   }
 
 }

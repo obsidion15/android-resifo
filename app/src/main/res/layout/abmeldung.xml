@@ -246,7 +246,7 @@
                     android:id="@+id/b_abZurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoHauptwohnsitz" />
+                    android:onClick="goBack" />
 
                 <Button
                     android:text="WEITER"

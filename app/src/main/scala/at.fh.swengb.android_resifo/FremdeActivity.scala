@@ -1,23 +1,17 @@
 package at.fh.swengb.android_resifo
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 
 /**
-  * Created by Martin on 15.01.2017.
+  * Created by Martin on 19.01.2017.
   */
-class AbmeldungActivity extends Activity{
+class FremdeActivity extends Activity{
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.abmeldung)
-  }
-
-  def gotoErfolgreich(view:View): Unit ={
-    val i = new Intent(this, classOf[ErfolgreichActivity])
-    startActivity(i)
+    setContentView(R.layout.reisedokument_fremde)
   }
 
   def goBack(view:View): Unit ={
