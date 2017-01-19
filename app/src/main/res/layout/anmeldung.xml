@@ -227,7 +227,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/rB_anAuslandJa"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:checked="true" />
 
                     <RadioButton
                         android:text="nein"
@@ -265,7 +266,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/rB_anHWSJa"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:checked="true" />
 
                     <RadioButton
                         android:text="nein"
