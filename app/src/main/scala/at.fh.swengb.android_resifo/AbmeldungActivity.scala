@@ -73,33 +73,6 @@ class AbmeldungActivity extends Activity{
     }
 
     db.getWritableDatabase().insert("abmeldung", null, cv)
-
-    var someCursor: Option[Cursor] = None
-    try {
-      someCursor = Option(db.getReadableDatabase.query("abmeldung", Array("abmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "verzugInsAusland"), null, null, null, null, null))
-
-      someCursor match {
-        case None => System.err.println("Could not execute query due to some reason")
-        case Some(c) =>
-          while (c.moveToNext()) {
-            val id = c.getInt(c.getColumnIndex("anmeldung_id"))
-            val p_id = c.getInt(c.getColumnIndex("person_id"))
-            val strasse = c.getString(c.getColumnIndex("strasse"))
-            val hausnr = c.getString(c.getColumnIndex("hausnr"))
-            val stiege = c.getString(c.getColumnIndex("stiege"))
-            val tuer = c.getString(c.getColumnIndex("tuer"))
-            val plz = c.getString(c.getColumnIndex("plz"))
-            val ort = c.getString(c.getColumnIndex("ort"))
-            val bundesland = c.getString(c.getColumnIndex("bundesland"))
-            val verzugInsAusland = c.getString(c.getColumnIndex("verzugInsAusland"))
-            println(s"ID($p_id): wohnhaft in $strasse $hausnr, Stiege $stiege, Tür $tuer, $plz $ort, $bundesland;Verzug aus Ausland $verzugInsAusland")
-          }
-      }
-
-    } finally {
-      someCursor foreach (_.close())
-    }
-
   }
 
   def gotoErfolgreich(view:View): Unit ={

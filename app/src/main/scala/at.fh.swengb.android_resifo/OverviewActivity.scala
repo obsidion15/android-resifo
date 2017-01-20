@@ -10,9 +10,17 @@ import android.view.View
   */
 class OverviewActivity extends Activity{
 
+  val d = new Data
+
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.overview)
+
+    val intent: Intent = getIntent
+    val person_id: Int = intent.getExtras.get("person_id").asInstanceOf[Int]
+
+    val db = Db(getApplicationContext())
+    d.fillDataIntoOverview(db, person_id)
   }
 
   def gotoPersoenlicheDaten(view:View): Unit ={
