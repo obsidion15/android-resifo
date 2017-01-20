@@ -20,7 +20,7 @@ class OverviewActivity extends Activity{
     val person_id: Int = intent.getExtras.get("person_id").asInstanceOf[Int]
 
     val db = Db(getApplicationContext())
-    d.fillDataIntoOverview(db, person_id)
+    d.getDataIntoOverview(db, person_id)
   }
 
   def gotoPersoenlicheDaten(view:View): Unit ={

@@ -7,7 +7,7 @@ import android.database.Cursor
   */
 class Data {
 
-  def fillDataIntoOverview(db: Db, i: Int):Unit = {
+  def getDataIntoOverview(db: Db, i: Int):Unit = {
     fillPersDaten(db, i)
     fillAnmeldeDaten(db, i)
     fillHwsDaten(db, i)
