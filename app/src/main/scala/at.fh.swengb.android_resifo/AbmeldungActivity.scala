@@ -72,7 +72,7 @@ class AbmeldungActivity extends Activity{
       case (k, v) => cv.put(k, v)
     }
 
-    db.getWritableDatabase().insert("person", null, cv)
+    db.getWritableDatabase().insert("abmeldung", null, cv)
 
     var someCursor: Option[Cursor] = None
     try {
