@@ -33,7 +33,8 @@
             android:id="@+id/textView2"
             android:layout_weight="1"
             android:textSize="46sp"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:lineSpacingExtra="8sp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -176,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView53"
-                android:text="(c) Jänner 2017"
+                android:text="© IMA15 Jänner 2017"
                 android:textAlignment="center" />
         </LinearLayout>
 
