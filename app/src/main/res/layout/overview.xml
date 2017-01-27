@@ -64,7 +64,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_nachname"
+                    android:id="@+id/eT_nachname"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -86,7 +86,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_vorname"
+                    android:id="@+id/eT_vorname"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -108,7 +108,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/tV_nachnameVorher"
+                    android:id="@+id/eT_nachnameVorher"
                     android:layout_weight="1"
                     android:elevation="1dp"
                     android:gravity="center_vertical" />
@@ -131,7 +131,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_gebDatum"
+                    android:id="@+id/rB_gebDatum"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -153,7 +153,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_gebOrt"
+                    android:id="@+id/eT_gebOrt"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -175,7 +175,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_geschlecht"
+                    android:id="@+id/rB_geschlecht"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -197,7 +197,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_religion"
+                    android:id="@+id/s_religion"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -219,7 +219,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_familienstand"
+                    android:id="@+id/s_familienstand"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -241,7 +241,7 @@
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tV_staat"
+                    android:id="@+id/s_staat"
                     android:layout_weight="1"
                     android:elevation="1dp" />
             </LinearLayout>
@@ -293,7 +293,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anStraße"
+                        android:id="@+id/eT_anStraße"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -315,7 +315,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anHausNr"
+                        android:id="@+id/eT_anHausNr"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -337,7 +337,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/tV_anStiege"
+                        android:id="@+id/eT_anStiege"
                         android:layout_weight="1"
                         android:elevation="1dp"
                         android:gravity="center_vertical" />
@@ -360,7 +360,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anTuer"
+                        android:id="@+id/eT_anTuer"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -382,7 +382,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anPLZ"
+                        android:id="@+id/eT_anPLZ"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -404,7 +404,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anOrt"
+                        android:id="@+id/eT_anOrt"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -426,7 +426,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anBundesland"
+                        android:id="@+id/s_anBundesland"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -448,7 +448,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anAusland"
+                        android:id="@+id/rB_anAusland"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -470,7 +470,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anHauptWS"
+                        android:id="@+id/rB_anHWS"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -492,7 +492,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_anNameUG"
+                        android:id="@+id/eT_anNameUG"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -546,7 +546,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_hwsStraße"
+                        android:id="@+id/eT_hwsStraße"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -568,7 +568,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_hwsHausNr"
+                        android:id="@+id/eT_hwsHausNr"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -590,7 +590,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/tV_hwsStiege"
+                        android:id="@+id/eT_hwsStiege"
                         android:layout_weight="1"
                         android:elevation="1dp"
                         android:gravity="center_vertical" />
@@ -613,7 +613,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_hwsTuer"
+                        android:id="@+id/eT_hwsTuer"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -635,7 +635,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_hwsPLZ"
+                        android:id="@+id/eT_hwsPLZ"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -657,7 +657,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_hwsOrt"
+                        android:id="@+id/eT_hwsOrt"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -679,7 +679,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_hwsBundesland"
+                        android:id="@+id/s_hwsBundesland"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -735,7 +735,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_abStraße"
+                        android:id="@+id/eT_abStraße"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -757,7 +757,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_abHausNr"
+                        android:id="@+id/eT_abHausNr"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -779,7 +779,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/tV_abStiege"
+                        android:id="@+id/eT_abStiege"
                         android:layout_weight="1"
                         android:elevation="1dp"
                         android:gravity="center_vertical" />
@@ -802,7 +802,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_abTuer"
+                        android:id="@+id/eT_abTuer"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -824,7 +824,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_abPLZ"
+                        android:id="@+id/eT_abPLZ"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -846,7 +846,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_abOrt"
+                        android:id="@+id/eT_abOrt"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -868,7 +868,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_abBundesland"
+                        android:id="@+id/s_abBundesland"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>
@@ -890,7 +890,7 @@
                         android:text="TextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tV_abAusland"
+                        android:id="@+id/rB_abAusland"
                         android:layout_weight="1"
                         android:elevation="1dp" />
                 </LinearLayout>

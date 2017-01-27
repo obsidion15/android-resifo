@@ -30,7 +30,6 @@ class PersoenlicheDatenActivity extends Activity{
     val s_gebJahr = findViewById(R.id.s_gebJahr).asInstanceOf[Spinner]
     val eT_gebOrt = findViewById(R.id.eT_gebOrt).asInstanceOf[EditText]
     val rb_m = findViewById(R.id.rB_m).asInstanceOf[RadioButton]
-//    val rb_w = findViewById(R.id.rB_w).asInstanceOf[RadioButton]
     val s_religion = findViewById(R.id.s_religion).asInstanceOf[Spinner]
     val s_famStand = findViewById(R.id.s_famStand).asInstanceOf[Spinner]
     val s_staat = findViewById(R.id.s_staat).asInstanceOf[Spinner]
@@ -83,36 +82,10 @@ class PersoenlicheDatenActivity extends Activity{
     }
 
     db.getWritableDatabase().insert("person", null, cv)
-
-    var someCursor: Option[Cursor] = None
-    try {
-      someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
-
-      someCursor match {
-        case None => System.err.println("Could not execute query due to some reason")
-        case Some(c) =>
-          while (c.moveToNext()) {
-            val id = c.getInt(c.getColumnIndex("person_id"))
-            val nachname = c.getString(c.getColumnIndex("nachname"))
-            val vorname = c.getString(c.getColumnIndex("vorname"))
-            val nachnameAlt = c.getString(c.getColumnIndex("nachnameAlt"))
-            val geburtsdatum = c.getString(c.getColumnIndex("geburtsdatum"))
-            val geburtsort = c.getString(c.getColumnIndex("geburtsort"))
-            val geschlecht = c.getString(c.getColumnIndex("geschlecht"))
-            val religion = c.getString(c.getColumnIndex("religion"))
-            val familienstand = c.getString(c.getColumnIndex("familienstand"))
-            val staatsangehoerigkeit = c.getString(c.getColumnIndex("staatsangehoerigkeit"))
-            println(s"ID($id): $nachname ($nachnameAlt) $vorname, geboren am $geburtsdatum in $geburtsort, Geschlecht: $geschlecht, $religion, $familienstand, $staatsangehoerigkeit")
-          }
-      }
-
-    } finally {
-      someCursor foreach (_.close())
-    }
   }
 
   def gotoAnmeldung(view:View): Unit ={
-//    saveData(view)
+    saveData(view)
     val i = new Intent(this, classOf[AnmeldungActivity])
     startActivity(i)
   }

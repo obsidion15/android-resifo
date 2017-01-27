@@ -2,6 +2,9 @@ package at.fh.swengb.android_resifo
 
 import android.os.Bundle
 import android.app.Activity
+import android.content.Intent
+import android.view.View
+import android.widget.AdapterView
 
 /**
   * Created by Martin on 15.01.2017.
@@ -12,5 +15,12 @@ class BearbeitenActivity extends Activity{
     super.onCreate(savedInstanceState)
     setContentView(R.layout.bearbeiten)
   }
+
+    def onItemClick(adapterView: AdapterView, view: View, i: Int, l: Long): Unit ={
+      val selectedId: Int = i + 1
+      val intent: Intent = new Intent(view.getContext, classOf[OverviewActivity])
+      intent.putExtra("person_id", selectedId)
+      startActivity(intent)
+    }
 
 }
