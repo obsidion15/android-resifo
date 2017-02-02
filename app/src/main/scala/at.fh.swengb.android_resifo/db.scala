@@ -38,7 +38,7 @@ case class Db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 
   def mkAnmDao(): SqliteAnmDao = SqliteAnmDao(getWritableDatabase)
   def mkHwsDao(): SqliteHwsDao = SqliteHwsDao(getWritableDatabase)
   def mkAbmDao(): SqliteAbmDao = SqliteAbmDao(getWritableDatabase)
-  def mkFremdao(): SqliteFremDao = SqliteFremDao(getWritableDatabase)
+  def mkFremDao(): SqliteFremDao = SqliteFremDao(getWritableDatabase)
 }
 
 case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{

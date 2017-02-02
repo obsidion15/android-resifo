@@ -12,6 +12,8 @@ import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 class AnmeldungActivity extends Activity{
 
   var db: Db = _
+  val intent: Intent = getIntent
+  val person_id = intent.getStringExtra("person_id")
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class AnmeldungActivity extends Activity{
   def gotoNext(view:View): Unit ={
     saveData(view)
     val i = if (rb_HWSJa.isChecked == false) new Intent(this, classOf[HauptwohnsitzActivity]) else new Intent(this, classOf[ErfolgreichActivity])
+    i.putExtra("person_id", person_id)
     startActivity(i)
   }
 
