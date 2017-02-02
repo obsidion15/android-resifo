@@ -12,14 +12,15 @@ import android.widget.{ArrayAdapter, EditText, Spinner}
 class HauptwohnsitzActivity extends Activity{
 
   var db: Db = _
-  val intent: Intent = getIntent
-  val person_id = intent.getStringExtra("person_id")
+  var person_id = ""
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.hauptwohnsitz)
     db = Db(getApplicationContext())
     fillAllSpinner()
+    val intent: Intent = getIntent
+    person_id = intent.getStringExtra("person_id")
   }
 
   def saveData(view: View): Unit = {
