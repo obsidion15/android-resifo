@@ -1,4 +1,5 @@
 <pre>
+
 Person;Date;Hours;Description
 mharing;20161216;4;Setup of project
 mstangl;20161219;3;Design
@@ -20,4 +21,5 @@ mstangl;20170120;1;impressum
 mstangl;20170121;1;some adjustments
 mharing;20170201;8;Implementation of a writable database and other functions
 mskergeth;20170202;3;Writing Dokumentation. Begin Testing
+
 </pre>
