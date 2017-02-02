@@ -17,18 +17,18 @@ class Anmeldung {
   private var hauptwohnsitz: String = ""
   private var unterkunftgeber: String = ""
 
-  def getAnmeldungId = anmeldung_id
-  def getPersonId = p_id
-  def getStrasse = strasse
-  def getHausnr = hausnr
-  def getStiege = stiege
-  def getTuer = tuer
-  def getPlz= plz
-  def getOrt= ort
-  def getBundesland = bundesland
-  def getZuzugAusAusland = zuzugAusAusland
-  def getHauptwohnsitz = hauptwohnsitz
-  def getUnterkunftgeber = unterkunftgeber
+  def getAnmeldungId(): Int = anmeldung_id
+  def getPersonId(): Int = p_id
+  def getStrasse(): String = strasse
+  def getHausnr(): String = hausnr
+  def getStiege(): String = stiege
+  def getTuer(): String = tuer
+  def getPlz(): String = plz
+  def getOrt(): String = ort
+  def getBundesland(): String = bundesland
+  def getZuzugAusAusland(): String = zuzugAusAusland
+  def getHauptwohnsitz(): String = hauptwohnsitz
+  def getUnterkunftgeber(): String = unterkunftgeber
 
   def setAnmeldungId(n: Int) = anmeldung_id = n
   def setPersonId(n: Int) = p_id = n

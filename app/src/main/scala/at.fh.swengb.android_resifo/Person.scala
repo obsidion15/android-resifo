@@ -15,16 +15,16 @@ class Person {
   private var familienstand: String = ""
   private var staatsangehoerigkeit: String = ""
 
-  def getPersonId = person_id
-  def getNachname = nachname
-  def getVorname = vorname
-  def getNachnameAlt = nachnameAlt
-  def getGeburtsdatum = geburtsdatum
-  def getGeburtsort = geburtsort
-  def getGeschlecht = geschlecht
-  def getReligion = religion
-  def getFamilienstand = familienstand
-  def getStaatsangehoerigkeit = staatsangehoerigkeit
+  def getPersonId(): Int = person_id
+  def getNachname(): String = nachname
+  def getVorname(): String  = vorname
+  def getNachnameAlt(): String  = nachnameAlt
+  def getGeburtsdatum(): String  = geburtsdatum
+  def getGeburtsort(): String  = geburtsort
+  def getGeschlecht(): String  = geschlecht
+  def getReligion(): String  = religion
+  def getFamilienstand(): String  = familienstand
+  def getStaatsangehoerigkeit(): String  = staatsangehoerigkeit
 
   def setPersonId(n: Int) = person_id = n
   def setNachname(n: String) = nachname = n
