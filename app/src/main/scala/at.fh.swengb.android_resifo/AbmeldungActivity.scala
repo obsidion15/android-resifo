@@ -15,14 +15,15 @@ import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 class AbmeldungActivity extends Activity{
 
   var db: Db = _
-  val intent: Intent = getIntent
-  val person_id = intent.getStringExtra("person_id")
+  var person_id = ""
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.abmeldung)
     db = Db(getApplicationContext())
     fillAllSpinner()
+    val intent: Intent = getIntent
+    person_id = intent.getStringExtra("person_id")
   }
 
   val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
