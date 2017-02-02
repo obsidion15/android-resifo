@@ -10,168 +10,194 @@ import android.view.View
   */
 class Data {
 
-  def getDataIntoOverview(db: Db, i: Int):Unit = {
-    fillPersDaten(db, i)
-    fillAnmeldeDaten(db, i)
-    fillHwsDaten(db, i)
-    fillAbmeldeDaten(db, i)
+  def getDataIntoOverview(db: Db, i: Int):Map[String, Iterable[Any]] = {
+    var dataMap: Map[String, Iterable[Any]] = Map()
+
+    dataMap = dataMap + ("person" -> fillPersDaten(db, i))
+    dataMap = dataMap + ("hauptwohnsitz" -> fillHwsDaten(db, i))
+    dataMap = dataMap + ("anmeldung" -> fillAnmeldeDaten(db, i))
+    dataMap = dataMap + ("abmeldung" -> fillAbmeldeDaten(db, i))
+    dataMap
   }
 
   def getDataIntoList(db: Db):Map[Int, List[Any]] = {
     var someCursor: Option[Cursor] = None
     var someCursorHw: Option[Cursor] = None
     var dataMap: Map[Int, List[Any]] = Map()
-    var person_id: Int = 0
-    var nachname: String = ""
-    var vorname: String = ""
-    var hauptsitz_id: Int = 0
-    var strasse: String = ""
-    var hausnr: String = ""
-    var plz: String = ""
-    var ort: String = ""
-    var bundesland: String = ""
 
     try {
       someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname"), null, null, null, null, null))
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
+          Map()
         case Some(c) =>
           while (c.moveToNext()) {
-            person_id = c.getInt(c.getColumnIndex("person_id"))
-            nachname = c.getString(c.getColumnIndex("nachname"))
-            vorname = c.getString(c.getColumnIndex("vorname"))
+            val personClass = new Person()
+            val hauptsitzClass = new Hauptwohnsitz()
+
+            personClass.setPersonId(c.getInt(c.getColumnIndex("person_id")))
+            personClass.setNachname(c.getString(c.getColumnIndex("nachname")))
+            personClass.setVorname(c.getString(c.getColumnIndex("vorname")))
 
             someCursorHw = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "plz", "ort", "bundesland"), "person_id = " + c.getInt(c.getColumnIndex("person_id")), null, null, null, null))
             someCursorHw match {
               case None => System.err.println("Could not execute query due to some reason")
               case Some(cHw) =>
                 while (cHw.moveToNext()) {
-                  hauptsitz_id = c.getInt(c.getColumnIndex("hauptsitz_id"))
-                  strasse = c.getString(c.getColumnIndex("strasse"))
-                  hausnr = c.getString(c.getColumnIndex("hausnr"))
-                  plz = c.getString(c.getColumnIndex("plz"))
-                  ort = c.getString(c.getColumnIndex("ort"))
-                  bundesland = c.getString(c.getColumnIndex("bundesland"))
+                  hauptsitzClass.setHauptsitzId(c.getInt(c.getColumnIndex("hauptsitz_id")))
+                  hauptsitzClass.setStrasse(c.getString(c.getColumnIndex("strasse")))
+                  hauptsitzClass.setHausnr(c.getString(c.getColumnIndex("hausnr")))
+                  hauptsitzClass.setPlz(c.getString(c.getColumnIndex("plz")))
+                  hauptsitzClass.setOrt(c.getString(c.getColumnIndex("ort")))
+                  hauptsitzClass.setBundesland(c.getString(c.getColumnIndex("bundesland")))
                 }
             }
-            dataMap = dataMap + (person_id -> List(nachname, vorname, strasse, hausnr, plz, ort, bundesland))
+            dataMap = dataMap + (c.getColumnIndex("person_id") -> List(personClass, hauptsitzClass))
           }
       }
-      return dataMap
+      dataMap
     } finally {
       someCursor foreach (_.close())
       Map()
     }
   }
 
-  def fillPersDaten(db: Db, i: Int): Unit = {
+  def fillPersDaten(db: Db, i: Int):Map[Int, Any] = {
     var someCursor: Option[Cursor] = None
+    var dataMap: Map[Int, Any] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
+          Map()
         case Some(c) =>
           while (c.moveToNext()) {
-            val id = c.getInt(c.getColumnIndex("person_id"))
-            val nachname = c.getString(c.getColumnIndex("nachname"))
-            val vorname = c.getString(c.getColumnIndex("vorname"))
-            val nachnameAlt = c.getString(c.getColumnIndex("nachnameAlt"))
-            val geburtsdatum = c.getString(c.getColumnIndex("geburtsdatum"))
-            val geburtsort = c.getString(c.getColumnIndex("geburtsort"))
-            val geschlecht = c.getString(c.getColumnIndex("geschlecht"))
-            val religion = c.getString(c.getColumnIndex("religion"))
-            val familienstand = c.getString(c.getColumnIndex("familienstand"))
-            val staatsangehoerigkeit = c.getString(c.getColumnIndex("staatsangehoerigkeit"))
-            println(s"ID($id): $nachname ($nachnameAlt) $vorname, geboren am $geburtsdatum in $geburtsort, Geschlecht: $geschlecht, $religion, $familienstand, $staatsangehoerigkeit")
+            val personClass = new Person()
+
+            personClass.setPersonId(c.getInt(c.getColumnIndex("person_id")))
+            personClass.setNachname(c.getString(c.getColumnIndex("nachname")))
+            personClass.setVorname(c.getString(c.getColumnIndex("vorname")))
+            personClass.setNachnameAlt(c.getString(c.getColumnIndex("nachnameAlt")))
+            personClass.setGeburtsdatum(c.getString(c.getColumnIndex("geburtsdatum")))
+            personClass.setGeburtsort(c.getString(c.getColumnIndex("geburtsort")))
+            personClass.setGeschlecht(c.getString(c.getColumnIndex("geschlecht")))
+            personClass.setReligion(c.getString(c.getColumnIndex("religion")))
+            personClass.setFamilienstand(c.getString(c.getColumnIndex("familienstand")))
+            personClass.setStaatsangehoerigkeit(c.getString(c.getColumnIndex("staatsangehoerigkeit")))
+
+            dataMap = dataMap + (c.getColumnIndex("person_id") -> personClass)
           }
+          dataMap
       }
     } finally {
       someCursor foreach (_.close())
+      Map()
     }
   }
 
-  def fillAnmeldeDaten(db: Db, i: Int): Unit = {
+  def fillAnmeldeDaten(db: Db, i: Int):Map[Int, Any]  = {
     var someCursor: Option[Cursor] = None
+    var dataMap: Map[Int, Any] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("anmeldung", Array("anmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "zuzugAusAusland", "hauptwohnsitz", "unterkunftgeber"), null, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
+          Map()
         case Some(c) =>
           while (c.moveToNext()) {
-            val id = c.getInt(c.getColumnIndex("anmeldung_id"))
-            val p_id = c.getInt(c.getColumnIndex("person_id"))
-            val strasse = c.getString(c.getColumnIndex("strasse"))
-            val hausnr = c.getString(c.getColumnIndex("hausnr"))
-            val stiege = c.getString(c.getColumnIndex("stiege"))
-            val tuer = c.getString(c.getColumnIndex("tuer"))
-            val plz = c.getString(c.getColumnIndex("plz"))
-            val ort = c.getString(c.getColumnIndex("ort"))
-            val bundesland = c.getString(c.getColumnIndex("bundesland"))
-            val zuzugAusAusland = c.getString(c.getColumnIndex("zuzugAusAusland"))
-            val hauptwohnsitz = c.getString(c.getColumnIndex("hauptwohnsitz"))
-            val unterkunftgeber = c.getString(c.getColumnIndex("unterkunftgeber"))
-            println(s"ID($p_id): wohnhaft in $strasse $hausnr, Stiege $stiege, Tür $tuer, $plz $ort, $bundesland; Zuzug aus Ausland $zuzugAusAusland; Hauptwohnsitz $hauptwohnsitz; Unterkunftgeber $unterkunftgeber")
+            val anmeldungClass = new Anmeldung()
+
+            anmeldungClass.setAnmeldungId(c.getInt(c.getColumnIndex("anmeldung_id")))
+            anmeldungClass.setPersonId(c.getInt(c.getColumnIndex("person_id")))
+            anmeldungClass.setStrasse(c.getString(c.getColumnIndex("strasse")))
+            anmeldungClass.setHausnr(c.getString(c.getColumnIndex("hausnr")))
+            anmeldungClass.setStiege(c.getString(c.getColumnIndex("stiege")))
+            anmeldungClass.setTuer(c.getString(c.getColumnIndex("tuer")))
+            anmeldungClass.setPlz(c.getString(c.getColumnIndex("plz")))
+            anmeldungClass.setOrt(c.getString(c.getColumnIndex("ort")))
+            anmeldungClass.setBundesland(c.getString(c.getColumnIndex("bundesland")))
+            anmeldungClass.setZuzugAusAusland(c.getString(c.getColumnIndex("zuzugAusAusland")))
+            anmeldungClass.setHauptwohnsitz(c.getString(c.getColumnIndex("hauptwohnsitz")))
+            anmeldungClass.setUnterkunftgeber(c.getString(c.getColumnIndex("unterkunftgeber")))
+
+            dataMap = dataMap + (c.getColumnIndex("anmeldung_id") -> anmeldungClass)
           }
+          dataMap
       }
 
     } finally {
       someCursor foreach (_.close())
+      Map()
     }
   }
 
-  def fillHwsDaten(db: Db, i: Int): Unit = {
+  def fillHwsDaten(db: Db, i: Int):Map[Int, Any]  = {
     var someCursor: Option[Cursor] = None
+    var dataMap: Map[Int, Any] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland"), null, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
+          Map()
         case Some(c) =>
           while (c.moveToNext()) {
-            val id = c.getInt(c.getColumnIndex("hauptsitz_id"))
-            val p_id = c.getInt(c.getColumnIndex("person_id"))
-            val strasse = c.getString(c.getColumnIndex("strasse"))
-            val hausnr = c.getString(c.getColumnIndex("hausnr"))
-            val stiege = c.getString(c.getColumnIndex("stiege"))
-            val tuer = c.getString(c.getColumnIndex("tuer"))
-            val plz = c.getString(c.getColumnIndex("plz"))
-            val ort = c.getString(c.getColumnIndex("ort"))
-            val bundesland = c.getString(c.getColumnIndex("bundesland"))
-            println(s"ID($p_id): wohnhaft in $strasse $hausnr, Stiege $stiege, Tür $tuer, $plz $ort, $bundesland")
+            val hauptsitzClass = new Hauptwohnsitz()
+
+            hauptsitzClass.setHauptsitzId(c.getInt(c.getColumnIndex("hauptsitz_id")))
+            hauptsitzClass.setPersonId(c.getInt(c.getColumnIndex("person_id")))
+            hauptsitzClass.setStrasse(c.getString(c.getColumnIndex("strasse")))
+            hauptsitzClass.setHausnr(c.getString(c.getColumnIndex("hausnr")))
+            hauptsitzClass.setStiege(c.getString(c.getColumnIndex("stiege")))
+            hauptsitzClass.setTuer(c.getString(c.getColumnIndex("tuer")))
+            hauptsitzClass.setPlz(c.getString(c.getColumnIndex("plz")))
+            hauptsitzClass.setOrt(c.getString(c.getColumnIndex("ort")))
+            hauptsitzClass.setBundesland(c.getString(c.getColumnIndex("bundesland"))
+            )
+            dataMap = dataMap + (c.getColumnIndex("hauptsitz_id") -> hauptsitzClass)
           }
+          dataMap
       }
 
     } finally {
       someCursor foreach (_.close())
+      Map()
     }
   }
 
-  def fillAbmeldeDaten(db: Db, i: Int): Unit = {
+  def fillAbmeldeDaten(db: Db, i: Int):Map[Int, Any]  = {
     var someCursor: Option[Cursor] = None
+    var dataMap: Map[Int, Any] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("abmeldung", Array("abmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "verzugInsAusland"), null, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
+          Map()
         case Some(c) =>
           while (c.moveToNext()) {
-            val id = c.getInt(c.getColumnIndex("anmeldung_id"))
-            val p_id = c.getInt(c.getColumnIndex("person_id"))
-            val strasse = c.getString(c.getColumnIndex("strasse"))
-            val hausnr = c.getString(c.getColumnIndex("hausnr"))
-            val stiege = c.getString(c.getColumnIndex("stiege"))
-            val tuer = c.getString(c.getColumnIndex("tuer"))
-            val plz = c.getString(c.getColumnIndex("plz"))
-            val ort = c.getString(c.getColumnIndex("ort"))
-            val bundesland = c.getString(c.getColumnIndex("bundesland"))
-            val verzugInsAusland = c.getString(c.getColumnIndex("verzugInsAusland"))
-            println(s"ID($p_id): wohnhaft in $strasse $hausnr, Stiege $stiege, Tür $tuer, $plz $ort, $bundesland;Verzug aus Ausland $verzugInsAusland")
+            val abmeldungClass = new Abmeldung()
+
+            abmeldungClass.setAbmeldungId(c.getInt(c.getColumnIndex("abmeldung_id")))
+            abmeldungClass.setPersonId(c.getInt(c.getColumnIndex("person_id")))
+            abmeldungClass.setStrasse(c.getString(c.getColumnIndex("strasse")))
+            abmeldungClass.setHausnr(c.getString(c.getColumnIndex("hausnr")))
+            abmeldungClass.setStiege(c.getString(c.getColumnIndex("stiege")))
+            abmeldungClass.setTuer(c.getString(c.getColumnIndex("tuer")))
+            abmeldungClass.setPlz(c.getString(c.getColumnIndex("plz")))
+            abmeldungClass.setOrt(c.getString(c.getColumnIndex("ort")))
+            abmeldungClass.setBundesland(c.getString(c.getColumnIndex("bundesland")))
+            abmeldungClass.setVerzugAusAusland(c.getString(c.getColumnIndex("verzugInsAusland")))
+
+            dataMap = dataMap + (c.getColumnIndex("abmeldung_id") -> abmeldungClass)
           }
+          dataMap
       }
 
     } finally {
       someCursor foreach (_.close())
+      Map()
     }
   }
 
