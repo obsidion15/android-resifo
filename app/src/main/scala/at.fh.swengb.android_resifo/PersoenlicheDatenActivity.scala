@@ -3,6 +3,7 @@ package at.fh.swengb.android_resifo
 import android.os.Bundle
 import android.app.Activity
 import android.content.Intent
+import android.database.Cursor
 import android.view.View
 import android.widget._
 
@@ -42,9 +43,34 @@ class PersoenlicheDatenActivity extends Activity{
     persDao.insert(persDaten)
   }
 
+  def getPersonId(): String = {
+
+    var someCursor: Option[Cursor] = None
+    var id = ""
+
+    try {
+      someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
+      someCursor match {
+        case None =>
+          System.err.println("Could not execute query due to some reason")
+          id
+        case Some(c) =>
+          while (c.moveToNext()) {
+            val pers_id = c.getInt(c.getColumnIndex("person_id"))
+            id += pers_id
+          }
+          id
+      }
+    } finally {
+      someCursor foreach (_.close())
+    }
+  }
+
   def gotoNext(view:View): Unit ={
     saveData(view)
+    val person_id: String = getPersonId()
     val i = new Intent(this, classOf[EntscheidungActivity])
+    i.putExtra("person_id", person_id)
     startActivity(i)
   }
 

@@ -12,6 +12,8 @@ import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 class FremdeActivity extends Activity{
 
   var db: Db = _
+  val intent: Intent = getIntent
+  val person_id = intent.getStringExtra("person_id")
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
@@ -40,6 +42,7 @@ class FremdeActivity extends Activity{
   def gotoNext(view: View): Unit ={
     saveData(view)
     val i = new Intent(this, classOf[EntscheidungActivity])
+    i.putExtra("person_id", person_id)
     startActivity(i)
   }
 
