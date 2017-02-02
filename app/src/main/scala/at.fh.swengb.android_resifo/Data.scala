@@ -62,9 +62,9 @@ class Data {
     }
   }
 
-  def fillPersDaten(db: Db, i: Int):Map[Int, Any] = {
+  def fillPersDaten(db: Db, i: Int):Map[Int, Person] = {
     var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Any] = Map()
+    var dataMap: Map[Int, Person] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
       someCursor match {
@@ -95,9 +95,9 @@ class Data {
     }
   }
 
-  def fillAnmeldeDaten(db: Db, i: Int):Map[Int, Any]  = {
+  def fillAnmeldeDaten(db: Db, i: Int):Map[Int, Anmeldung]  = {
     var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Any] = Map()
+    var dataMap: Map[Int, Anmeldung] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("anmeldung", Array("anmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "zuzugAusAusland", "hauptwohnsitz", "unterkunftgeber"), null, null, null, null, null))
 
@@ -132,9 +132,9 @@ class Data {
     }
   }
 
-  def fillHwsDaten(db: Db, i: Int):Map[Int, Any]  = {
+  def fillHwsDaten(db: Db, i: Int):Map[Int, Hauptwohnsitz]  = {
     var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Any] = Map()
+    var dataMap: Map[Int, Hauptwohnsitz] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland"), null, null, null, null, null))
 
@@ -166,9 +166,9 @@ class Data {
     }
   }
 
-  def fillAbmeldeDaten(db: Db, i: Int):Map[Int, Any]  = {
+  def fillAbmeldeDaten(db: Db, i: Int):Map[Int, Abmeldung]  = {
     var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Any] = Map()
+    var dataMap: Map[Int, Abmeldung] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("abmeldung", Array("abmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "verzugInsAusland"), null, null, null, null, null))
 

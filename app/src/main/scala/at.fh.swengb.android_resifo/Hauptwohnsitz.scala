@@ -14,15 +14,15 @@ class Hauptwohnsitz {
   private var ort: String = ""
   private var bundesland: String = ""
 
-  def getHauptsitzId = hauptsitz_id
-  def getPersonId = person_id
-  def getStrasse = strasse
-  def getHausnr = hausnr
-  def getStiege = stiege
-  def getTuer = tuer
-  def getPlz= plz
-  def getOrt= ort
-  def getBundesland = bundesland
+  def getHauptsitzId(): Int = hauptsitz_id
+  def getPersonId(): Int = person_id
+  def getStrasse(): String = strasse
+  def getHausnr(): String = hausnr
+  def getStiege(): String = stiege
+  def getTuer(): String = tuer
+  def getPlz(): String = plz
+  def getOrt(): String = ort
+  def getBundesland(): String = bundesland
 
   def setHauptsitzId(n: Int) = hauptsitz_id = n
   def setPersonId(n: Int) = person_id = n

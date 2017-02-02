@@ -15,16 +15,16 @@ class Abmeldung {
   private var bundesland: String = ""
   private var verzugAusAusland: String = ""
 
-  def getAbmeldungId = abmeldung_id
-  def getPersonId = p_id
-  def getStrasse = strasse
-  def getHausnr = hausnr
-  def getStiege = stiege
-  def getTuer = tuer
-  def getPlz= plz
-  def getOrt= ort
-  def getBundesland = bundesland
-  def getVerzugAusAusland = verzugAusAusland
+  def getAbmeldungId(): Int = abmeldung_id
+  def getPersonId(): Int = p_id
+  def getStrasse(): String = strasse
+  def getHausnr(): String = hausnr
+  def getStiege(): String = stiege
+  def getTuer(): String = tuer
+  def getPlz(): String = plz
+  def getOrt(): String = ort
+  def getBundesland(): String = bundesland
+  def getVerzugAusAusland(): String = verzugAusAusland
 
   def setAbmeldungId(n: Int) = abmeldung_id = n
   def setPersonId(n: Int) = p_id = n
