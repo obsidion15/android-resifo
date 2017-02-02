@@ -8,6 +8,9 @@ import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 
 /**
   * Created by Martin on 15.01.2017.
+  * Hier werden Spinner gefüllt,
+  * Daten gespeichert und
+  * die Buttons programmiert.
   */
 class AbmeldungActivity extends Activity{
 

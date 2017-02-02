@@ -5,6 +5,8 @@ import android.database.sqlite.{SQLiteDatabase, SQLiteOpenHelper}
 
 /**
   * Created by Sabine on 16.01.2017.
+  * Updated a lot.
+  * Really.
   */
 case class Db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 1) {
 
@@ -26,12 +28,17 @@ case class Db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 
     //Tabelle Abmeldung
     val abmDao = SqliteAbmDao(db)
     abmDao.init()
+
+    //Tabelle Fremde (Reisedokumente)
+    val fremDao = SqliteFremDao(db)
+    fremDao.init()
   }
 
   def mkPersDao(): SqlitePersDao = SqlitePersDao(getWritableDatabase)
   def mkAnmDao(): SqliteAnmDao = SqliteAnmDao(getWritableDatabase)
   def mkHwsDao(): SqliteHwsDao = SqliteHwsDao(getWritableDatabase)
   def mkAbmDao(): SqliteAbmDao = SqliteAbmDao(getWritableDatabase)
+  def mkFremdao(): SqliteFremDao = SqliteFremDao(getWritableDatabase)
 }
 
 case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{
@@ -242,6 +249,44 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
                                         p.ort,
                                         p.bundesland,
                                         p.zuzugAusAusland))
+  }
+}
+
+case class SqliteFremDao(db: SQLiteDatabase) extends BaseDao[FremdeDaten]{
+  def init(): Unit = db.execSQL("create table fremde " +
+    "(person_id INTEGER PRIMARY KEY ASC, " +
+    "art TEXT, " +
+    "nummer TEXT, " +
+    "datum TEXT, " +
+    "behoerde TEXT, " +
+    "staatsangehoerigkeit TEXT);");
+
+  def insert(p: FremdeDaten): Long = {
+    val cv: ContentValues = mkContentValues(p)
+    db.insert("fremde", null, cv)
+  }
+
+  def mkContentValues(p: FremdeDaten): ContentValues = {
+    val cv = new ContentValues
+    cv.put("art", p.art)
+    cv.put("nummer", p.nummer)
+    cv.put("datum", p.datum)
+    cv.put("behoerde", p.behoerde)
+    cv.put("staatsangehoerigkeit", p.staat)
+    cv
+  }
+
+  def update(p:FremdeDaten): Int = {
+    db.update("fremde", mkContentValues(p),
+        "art = ?, " +
+        "nummer = ?, " +
+        "datum = ?, " +
+        "behoerde = ? and " +
+        "staatsangehoerigkeit = ?", Array(  p.art,
+                                            p.nummer,
+                                            p.datum,
+                                            p.behoerde,
+                                            p.staat))
   }
 }
 
