@@ -5,7 +5,7 @@ import android.content.{ContentValues, Intent}
 import android.database.Cursor
 import android.os.Bundle
 import android.view.View
-import android.widget.{EditText, RadioButton, Spinner}
+import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 
 /**
   * Created by Martin on 15.01.2017.
@@ -18,61 +18,24 @@ class AbmeldungActivity extends Activity{
     super.onCreate(savedInstanceState)
     setContentView(R.layout.abmeldung)
     db = Db(getApplicationContext())
+    fillAllSpinner()
   }
 
   def saveData(view: View): Unit = {
-    val eT_strasse = findViewById(R.id.eT_abStraße).asInstanceOf[EditText]
-    val eT_hausnummer = findViewById(R.id.eT_abHausNr).asInstanceOf[EditText]
-    val eT_stiege = findViewById(R.id.eT_abStiege).asInstanceOf[EditText]
-    val eT_tuer = findViewById(R.id.eT_abTuer).asInstanceOf[EditText]
-    val eT_plz = findViewById(R.id.eT_abPLZ).asInstanceOf[EditText]
-    val eT_ort = findViewById(R.id.eT_abOrt).asInstanceOf[EditText]
-    val s_bundesland = findViewById(R.id.s_abBundesland).asInstanceOf[Spinner]
+    val strasse = findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString
+    val stiege = findViewById(R.id.eT_abStiege).asInstanceOf[EditText].getText.toString
+    val tuer = findViewById(R.id.eT_abTuer).asInstanceOf[EditText].getText.toString
+    val plz = findViewById(R.id.eT_abPLZ).asInstanceOf[EditText].getText.toString
+    val ort = findViewById(R.id.eT_abOrt).asInstanceOf[EditText].getText.toString
+    val bundesland = findViewById(R.id.s_abBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
+    val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
 
-    val cv = new ContentValues()
+    val abmeldeDaten: AbmeldeDaten = AbmeldeDaten(strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland)
 
-    val strasse: String = eT_strasse.getText.toString
-    Map("strasse" -> strasse) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    val hausnummer: String = eT_hausnummer.getText.toString
-    Map("hausnr" -> hausnummer) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    val stiege: String = eT_stiege.getText.toString
-    Map("stiege" -> stiege) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    val tuer = eT_tuer.getText.toString
-    Map("tuer" -> tuer) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    val plz = eT_plz.getText.toString
-    Map("plz" -> plz) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    val ort = eT_ort.getText.toString
-    Map("ort" -> ort) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    val bundesland: String = s_bundesland.getSelectedItem().toString()
-    Map("bundesland" -> bundesland) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    val verzugInsAusland: String = if (rb_auslandJa.isChecked == true) "ja" else "nein"
-    Map("verzugInsAusland" -> verzugInsAusland) foreach {
-      case (k, v) => cv.put(k, v)
-    }
-
-    db.getWritableDatabase().insert("abmeldung", null, cv)
+    val abmDao = db.mkAbmDao()
+    abmDao.insert(abmeldeDaten)
   }
 
   def gotoErfolgreich(view:View): Unit ={
@@ -84,4 +47,12 @@ class AbmeldungActivity extends Activity{
     finish()
   }
 
+  def fillAllSpinner(): Unit ={
+    fillSpinner(findViewById(R.id.s_abBundesland).asInstanceOf[Spinner], Array("Steiermark", "Kärnten", "Burgenland", "Tirol", "Vorarlberg", "Salzburg", "Niederösterreich", "Oberösterreich", "Wien"))
+  }
+
+  def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
+    val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
+    spinner.setAdapter(adapter)
+  }
 }
