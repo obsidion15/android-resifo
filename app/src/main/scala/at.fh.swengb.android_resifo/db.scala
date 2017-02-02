@@ -254,7 +254,8 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
 
 case class SqliteFremDao(db: SQLiteDatabase) extends BaseDao[FremdeDaten]{
   def init(): Unit = db.execSQL("create table fremde " +
-    "(person_id INTEGER PRIMARY KEY ASC, " +
+    " (fremd_id INTEGER PRIMARY KEY ASC, " +
+    "person_id INTEGER, " +
     "art TEXT, " +
     "nummer TEXT, " +
     "datum TEXT, " +

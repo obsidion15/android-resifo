@@ -38,7 +38,7 @@ class AbmeldungActivity extends Activity{
     val bundesland = findViewById(R.id.s_abBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
 
-    val abmeldeDaten: AbmeldeDaten = AbmeldeDaten(strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland)
+    val abmeldeDaten: AbmeldeDaten = AbmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland)
 
     val abmDao = db.mkAbmDao()
     abmDao.insert(abmeldeDaten)

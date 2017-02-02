@@ -34,7 +34,7 @@ class FremdeActivity extends Activity{
     val behoerde = findViewById(R.id.eT_rdBehoerde).asInstanceOf[EditText].getText.toString
     val staat = findViewById(R.id.s_rdStaat).asInstanceOf[Spinner].getSelectedItem.toString
 
-    val fremdDaten: FremdeDaten = FremdeDaten(art, nummer, rdDatum, behoerde, staat)
+    val fremdDaten: FremdeDaten = FremdeDaten(person_id, art, nummer, rdDatum, behoerde, staat)
 
     val fremDao = db.mkFremDao()
     fremDao.insert(fremdDaten)
