@@ -35,9 +35,9 @@ class HauptwohnsitzActivity extends Activity{
     hwsDao.insert(hwsDaten)
   }
 
-  def gotoAbmeldung(view:View): Unit ={
+  def gotoNext(view:View): Unit ={
     saveData(view)
-    val i = new Intent(this, classOf[AbmeldungActivity])
+    val i = new Intent(this, classOf[ErfolgreichActivity])
     startActivity(i)
   }
 

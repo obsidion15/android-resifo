@@ -44,7 +44,7 @@ class PersoenlicheDatenActivity extends Activity{
 
   def gotoNext(view:View): Unit ={
     saveData(view)
-    val i = new Intent(this, classOf[AnmeldungActivity])
+    val i = new Intent(this, classOf[EntscheidungActivity])
     startActivity(i)
   }
 
@@ -55,7 +55,7 @@ class PersoenlicheDatenActivity extends Activity{
   def fillAllSpinner(): Unit ={
     fillSpinner(findViewById(R.id.s_gebTag).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_gebMonat).asInstanceOf[Spinner], Array.range(1,12 + 1).map(x => x.toString))
-    fillSpinner(findViewById(R.id.s_gebJahr).asInstanceOf[Spinner], Array.range(1950,2015 + 1).map(x => x.toString))
+    fillSpinner(findViewById(R.id.s_gebJahr).asInstanceOf[Spinner], Array.range(1970,2015 + 1).reverse.map(x => x.toString))
     fillSpinner(findViewById(R.id.s_religion).asInstanceOf[Spinner], Array("röm-kath","andere"))
     fillSpinner(findViewById(R.id.s_famStand).asInstanceOf[Spinner], Array("ledig","verheiratet","geschieden","..."))
     fillSpinner(findViewById(R.id.s_staat).asInstanceOf[Spinner], Array("Österreich", "Deutschland", "..."))

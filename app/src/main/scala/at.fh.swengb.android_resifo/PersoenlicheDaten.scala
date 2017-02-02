@@ -40,3 +40,9 @@ case class AbmeldeDaten(strasse: String,
                         ort: String,
                         bundesland: String,
                         zuzugAusAusland: String)
+
+case class FremdeDaten(art: String,
+                       nummer: String,
+                       datum: String,
+                       behoerde:String,
+                       staat:String)
