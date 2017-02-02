@@ -14,24 +14,26 @@ class BearbeitenActivity extends Activity{
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
-    db = Db(getApplicationContext())
+    setContentView(R.layout.bearbeiten)
 
+    var myListView = findViewById(R.id.LV_bearbeiten).asInstanceOf[ListView]
+
+    db = Db(getApplicationContext())
     var data = new Data();
     val list = data.getDataIntoList(db);
 
+    var myAdapter = new PersonAdapter(this, list)
+    myListView.setAdapter(myAdapter)
 
-    println(list)
 
-
-    setContentView(R.layout.bearbeiten)
+    myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      override def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long): Unit = {
+        //val selectedItem = myAdapter.getItem(position) + 1
+        val intent = new Intent(view.getContext, classOf[OverviewActivity])
+        intent.putExtra("person_id",position + 1)
+        startActivity(intent)
+      }
+    })
   }
-
-  def onItemClick(listview: ListView, view: View, i: Int, l: Long): Unit ={
-    val selectedId: Int = i + 1
-    val intent: Intent = new Intent(view.getContext, classOf[OverviewActivity])
-    intent.putExtra("person_id", selectedId)
-    startActivity(intent)
-  }
-
 
 }
