@@ -1,8 +1,7 @@
 package at.fh.swengb.android_resifo
 
 import android.app.Activity
-import android.content.{ContentValues, Intent}
-import android.database.Cursor
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
@@ -39,6 +38,7 @@ class AbmeldungActivity extends Activity{
   }
 
   def gotoErfolgreich(view:View): Unit ={
+    saveData(view)
     val i = new Intent(this, classOf[ErfolgreichActivity])
     startActivity(i)
   }

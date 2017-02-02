@@ -1,11 +1,8 @@
 package at.fh.swengb.android_resifo
 
-import java.util
-
 import android.os.Bundle
 import android.app.Activity
-import android.content.{ContentValues, Intent}
-import android.database.Cursor
+import android.content.Intent
 import android.view.View
 import android.widget._
 

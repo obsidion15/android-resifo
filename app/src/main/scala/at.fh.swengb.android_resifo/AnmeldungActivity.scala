@@ -1,8 +1,7 @@
 package at.fh.swengb.android_resifo
 
 import android.app.Activity
-import android.content.{ContentValues, Intent}
-import android.database.Cursor
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
@@ -42,6 +41,7 @@ class AnmeldungActivity extends Activity{
   }
 
   def gotoHauptwohnsitz(view:View): Unit ={
+    saveData(view)
     val i = new Intent(this, classOf[HauptwohnsitzActivity])
     startActivity(i)
   }
