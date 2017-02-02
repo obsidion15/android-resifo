@@ -56,13 +56,13 @@ case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{
     val cv = new ContentValues
     cv.put("nachname", p.nachname)
     cv.put("vorname", p.vorname)
-    cv.put("nachnameVorher", p.nachnameVorher)
-    cv.put("gebDatum", p.gebDatum)
-    cv.put("gebOrt", p.gebOrt)
+    cv.put("nachnameAlt", p.nachnameVorher)
+    cv.put("geburtsdatum", p.gebDatum)
+    cv.put("geburtsort", p.gebOrt)
     cv.put("geschlecht", p.geschlecht)
     cv.put("religion", p.religion)
-    cv.put("famStand", p.famStand)
-    cv.put("staat", p.staat)
+    cv.put("familienstand", p.famStand)
+    cv.put("staatsangehoerigkeit", p.staat)
     cv
   }
 
@@ -70,21 +70,21 @@ case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{
     db.update("person", mkContentValues(p),
         "nachname = ?, " +
         "vorname = ?, " +
-        "nachnameVorher = ?, " +
-        "gebDatum = ?, " +
-        "gebOrt = ?," +
+        "nachnameAlt = ?, " +
+        "geburtsdatum = ?, " +
+        "geburtsort = ?," +
         "geschlecht = ?," +
         "religion = ?, " +
-        "famStand = ? and" +
-        "staat = ?", Array( p.nachname,
-                            p.vorname,
-                            p.nachnameVorher,
-                            p.gebDatum,
-                            p.gebOrt,
-                            p.geschlecht,
-                            p.religion,
-                            p.famStand,
-                            p.staat))
+        "familienstand = ? and" +
+        "staatsangehoerigkeit = ?", Array(  p.nachname,
+                                            p.vorname,
+                                            p.nachnameVorher,
+                                            p.gebDatum,
+                                            p.gebOrt,
+                                            p.geschlecht,
+                                            p.religion,
+                                            p.famStand,
+                                            p.staat))
   }
 }
 
@@ -111,7 +111,7 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
   def mkContentValues(p: AnmeldeDaten): ContentValues = {
     val cv = new ContentValues
     cv.put("strasse", p.strasse)
-    cv.put("hausnummer", p.hausnummer)
+    cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
     cv.put("tuer", p.tuer)
     cv.put("plz", p.plz)
@@ -126,7 +126,7 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
   def update(p: AnmeldeDaten): Int = {
     db.update("anmeldung", mkContentValues(p),
         "strasse = ?, " +
-        "hausnummer = ?, " +
+        "hausnr = ?, " +
         "stiege = ?, " +
         "tuer = ?, " +
         "plz = ?," +
@@ -167,7 +167,7 @@ case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
   def mkContentValues(p: HauptwohnsitzDaten): ContentValues = {
     val cv = new ContentValues
     cv.put("strasse", p.strasse)
-    cv.put("hausnummer", p.hausnummer)
+    cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
     cv.put("tuer", p.tuer)
     cv.put("plz", p.plz)
@@ -178,8 +178,8 @@ case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
 
   def update(p: HauptwohnsitzDaten): Int = {
     db.update("hauptsitz", mkContentValues(p),
-      "strasse = ?, " +
-        "hausnummer = ?, " +
+        "strasse = ?, " +
+        "hausnr = ?, " +
         "stiege = ?, " +
         "tuer = ?, " +
         "plz = ?," +
@@ -215,7 +215,7 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
   def mkContentValues(p: AbmeldeDaten): ContentValues = {
     val cv = new ContentValues
     cv.put("strasse", p.strasse)
-    cv.put("hausnummer", p.hausnummer)
+    cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
     cv.put("tuer", p.tuer)
     cv.put("plz", p.plz)
@@ -227,8 +227,8 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
 
   def update(p: AbmeldeDaten): Int = {
     db.update("abmeldung", mkContentValues(p),
-      "strasse = ?, " +
-        "hausnummer = ?, " +
+        "strasse = ?, " +
+        "hausnr = ?, " +
         "stiege = ?, " +
         "tuer = ?, " +
         "plz = ?," +
