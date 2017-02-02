@@ -39,7 +39,7 @@ class Data {
             personClass.setNachname(c.getString(c.getColumnIndex("nachname")))
             personClass.setVorname(c.getString(c.getColumnIndex("vorname")))
 
-            someCursorHw = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "plz", "ort", "bundesland"), "person_id = " + c.getInt(c.getColumnIndex("person_id")), null, null, null, null))
+            someCursorHw = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "plz", "ort"), "person_id = " + personClass.getPersonId(), null, null, null, null))
             someCursorHw match {
               case None => System.err.println("Could not execute query due to some reason")
               case Some(cHw) =>
@@ -49,7 +49,6 @@ class Data {
                   hauptsitzClass.setHausnr(c.getString(c.getColumnIndex("hausnr")))
                   hauptsitzClass.setPlz(c.getString(c.getColumnIndex("plz")))
                   hauptsitzClass.setOrt(c.getString(c.getColumnIndex("ort")))
-                  hauptsitzClass.setBundesland(c.getString(c.getColumnIndex("bundesland")))
                 }
             }
             dataMap = dataMap + (personClass.getPersonId() -> List(personClass, hauptsitzClass))
@@ -63,10 +62,15 @@ class Data {
   }
 
   def fillPersDaten(db: Db, i: Int):Map[Int, Person] = {
+    var where:String = ""
+    if(i != 0) {
+      where = "person_id = " + i
+    }
+
     var someCursor: Option[Cursor] = None
     var dataMap: Map[Int, Person] = Map()
     try {
-      someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
+      someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), where, null, null, null, null))
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
           Map()
@@ -96,10 +100,15 @@ class Data {
   }
 
   def fillAnmeldeDaten(db: Db, i: Int):Map[Int, Anmeldung]  = {
+    var where:String = ""
+    if(i != 0) {
+      where = "person_id = " + i
+    }
+
     var someCursor: Option[Cursor] = None
     var dataMap: Map[Int, Anmeldung] = Map()
     try {
-      someCursor = Option(db.getReadableDatabase.query("anmeldung", Array("anmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "zuzugAusAusland", "hauptwohnsitz", "unterkunftgeber"), null, null, null, null, null))
+      someCursor = Option(db.getReadableDatabase.query("anmeldung", Array("anmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "zuzugAusAusland", "hauptwohnsitz", "unterkunftgeber"), where, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
@@ -133,10 +142,15 @@ class Data {
   }
 
   def fillHwsDaten(db: Db, i: Int):Map[Int, Hauptwohnsitz]  = {
+    var where:String = ""
+    if(i != 0) {
+      where = "person_id = " + i
+    }
+
     var someCursor: Option[Cursor] = None
     var dataMap: Map[Int, Hauptwohnsitz] = Map()
     try {
-      someCursor = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland"), null, null, null, null, null))
+      someCursor = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland"), where, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
@@ -167,10 +181,15 @@ class Data {
   }
 
   def fillAbmeldeDaten(db: Db, i: Int):Map[Int, Abmeldung]  = {
+    var where:String = ""
+    if(i != 0) {
+      where = "person_id = " + i
+    }
+
     var someCursor: Option[Cursor] = None
     var dataMap: Map[Int, Abmeldung] = Map()
     try {
-      someCursor = Option(db.getReadableDatabase.query("abmeldung", Array("abmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "verzugInsAusland"), null, null, null, null, null))
+      someCursor = Option(db.getReadableDatabase.query("abmeldung", Array("abmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "verzugInsAusland"), where, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
