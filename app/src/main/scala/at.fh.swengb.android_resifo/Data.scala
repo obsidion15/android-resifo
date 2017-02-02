@@ -52,7 +52,7 @@ class Data {
                   hauptsitzClass.setBundesland(c.getString(c.getColumnIndex("bundesland")))
                 }
             }
-            dataMap = dataMap + (c.getColumnIndex("person_id") -> List(personClass, hauptsitzClass))
+            dataMap = dataMap + (personClass.getPersonId() -> List(personClass, hauptsitzClass))
           }
       }
       dataMap
@@ -85,7 +85,7 @@ class Data {
             personClass.setFamilienstand(c.getString(c.getColumnIndex("familienstand")))
             personClass.setStaatsangehoerigkeit(c.getString(c.getColumnIndex("staatsangehoerigkeit")))
 
-            dataMap = dataMap + (c.getColumnIndex("person_id") -> personClass)
+            dataMap = dataMap + (personClass.getPersonId() -> personClass)
           }
           dataMap
       }
@@ -121,7 +121,7 @@ class Data {
             anmeldungClass.setHauptwohnsitz(c.getString(c.getColumnIndex("hauptwohnsitz")))
             anmeldungClass.setUnterkunftgeber(c.getString(c.getColumnIndex("unterkunftgeber")))
 
-            dataMap = dataMap + (c.getColumnIndex("anmeldung_id") -> anmeldungClass)
+            dataMap = dataMap + (anmeldungClass.getAnmeldungId() -> anmeldungClass)
           }
           dataMap
       }
@@ -155,7 +155,7 @@ class Data {
             hauptsitzClass.setOrt(c.getString(c.getColumnIndex("ort")))
             hauptsitzClass.setBundesland(c.getString(c.getColumnIndex("bundesland"))
             )
-            dataMap = dataMap + (c.getColumnIndex("hauptsitz_id") -> hauptsitzClass)
+            dataMap = dataMap + (hauptsitzClass.getHauptsitzId() -> hauptsitzClass)
           }
           dataMap
       }
@@ -190,7 +190,7 @@ class Data {
             abmeldungClass.setBundesland(c.getString(c.getColumnIndex("bundesland")))
             abmeldungClass.setVerzugAusAusland(c.getString(c.getColumnIndex("verzugInsAusland")))
 
-            dataMap = dataMap + (c.getColumnIndex("abmeldung_id") -> abmeldungClass)
+            dataMap = dataMap + (abmeldungClass.getAbmeldungId() -> abmeldungClass)
           }
           dataMap
       }
