@@ -1,4 +1,22 @@
 <pre>
 Person:Date:Hours:Description
-haringma15:20161216:4:Setup of project
+mharing:20161216:4:Setup of project
+mstangl:20161219:3:Design
+mskergeth:20161222:3:proposal.md
+mskergeth:20161223:1:proposal.md
+mstangl:20161227:2:Views
+mstangl:20161228:3:Views
+mstangl:20170102:4:Views
+mharing:20170115:3:Activities, goto functions
+sgollinger:20170116:2:initial implementation of the database
+mharing:20170116:1:Initial Implementation of OverviewActivity
+mharing:20170117:2:Db Implementation into PersoenlicheDatenActivity
+mstangl:20170117:1:minor changes
+mharing:20170118:1:Implementation of saveData function
+mharing:20170118:2:Db Implementation into HauptwohnsitzActivity
+mharing:20170119:1:Modification of goto functions
+sgollinger:20170119:4:Db Implementation into AbmeldungActivity and AnmeldungActivity
+mstangl:20170120:1:impressum
+mstangl:20170121:1:some adjustments
+mharing:20170201:8:Implementation of a writable database and other functions
 </pre>
