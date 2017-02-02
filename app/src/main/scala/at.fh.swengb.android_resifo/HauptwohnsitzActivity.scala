@@ -32,7 +32,7 @@ class HauptwohnsitzActivity extends Activity{
     val ort = findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString
     val bundesland = findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
 
-    val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
+    val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
 
     val hwsDao = db.mkHwsDao()
     hwsDao.insert(hwsDaten)

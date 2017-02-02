@@ -38,7 +38,7 @@ class AnmeldungActivity extends Activity{
     val hws = if (rb_HWSJa.isChecked == true) "ja" else "nein"
     val nameUG = findViewById(R.id.eT_anNameUG).asInstanceOf[EditText].getText.toString
 
-    val anmeldeDaten: AnmeldeDaten = AnmeldeDaten(strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland, hws, nameUG)
+    val anmeldeDaten: AnmeldeDaten = AnmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland, hws, nameUG)
 
     val anmDao = db.mkAnmDao()
     anmDao.insert(anmeldeDaten)
