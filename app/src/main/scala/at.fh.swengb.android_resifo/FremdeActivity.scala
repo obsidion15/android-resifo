@@ -36,7 +36,7 @@ class FremdeActivity extends Activity{
     val behoerde = findViewById(R.id.eT_rdBehoerde).asInstanceOf[EditText].getText.toString
     val staat = findViewById(R.id.s_rdStaat).asInstanceOf[Spinner].getSelectedItem.toString
 
-    rdDatum = checkDate(rdDatum, rdJahr, rdMonat)
+    rdDatum = checkDate(rdTag, rdMonat, rdJahr)
 
     val fremdDaten: FremdeDaten = FremdeDaten(person_id, art, nummer, rdDatum, behoerde, staat)
 
@@ -67,21 +67,22 @@ class FremdeActivity extends Activity{
     }
   }
 
-  def checkDate(date: String, year: String, month: String): String = {
+  def checkDate(day: String, month: String, year: String): String = {
 
-    val regSchaltjahr: Regex = "((30|31)\\..?2\\.\\d\\d\\d\\d)".r
-    val regFeb: Regex = "((29|30|31)\\..?2\\.\\d\\d\\d\\d)".r
-    val regRest: Regex = "(31\\.(.?4|.?6|.?9|11)\\.\\d\\d\\d\\d)".r
+    val date = s"$day.$month.$year"
 
-    if (year.toInt % 4 == 0) date match {
-      case regSchaltjahr() => s"28.2.$year"
-      case regRest() => s"30.$month.$year"
-      case _ => date
+    if (year.toInt % 4 == 0){
+      if (month == "2") {
+        if (day.toInt > 29) return s"29.2.$year"
+      }
     }
-    else date match {
-      case regFeb() => s"28.2.$year"
-      case regRest() => s"30.$month.$year"
-      case _ => date
+    else {
+      if (month == "2"){
+        if (day.toInt > 28) return s"28.2.$year"
+      }
+      else if (month == "4" || month == "6" || month == "9" || month == "11") {
+        if (day.toInt > 30) return s"30.$month.$year"
+      }
     }
     date
   }
