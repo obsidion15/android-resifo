@@ -23,7 +23,7 @@ class HauptwohnsitzActivity extends Activity{
     fillAllSpinner()
 
     val intent: Intent = getIntent
-    person_id = intent.getStringExtra("person_id").toInt
+    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
 
     val dataMap = d.fillHwsDaten(db, person_id)
     fillDataInTextView(dataMap, person_id)

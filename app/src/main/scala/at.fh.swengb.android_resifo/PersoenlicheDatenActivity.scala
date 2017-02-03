@@ -6,6 +6,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.view.View
 import android.widget._
+import scala.util.matching.Regex
 
 /**
   * Created by Martin on 15.01.2017.
@@ -84,13 +85,15 @@ class PersoenlicheDatenActivity extends Activity{
     val gebTag = findViewById(R.id.s_gebTag).asInstanceOf[Spinner].getSelectedItem.toString
     val gebMonat = findViewById(R.id.s_gebMonat).asInstanceOf[Spinner].getSelectedItem.toString
     val gebJahr = findViewById(R.id.s_gebJahr).asInstanceOf[Spinner].getSelectedItem.toString
-    val gebDatum = s"$gebTag.$gebMonat.$gebJahr"
+    var gebDatum = s"$gebTag.$gebMonat.$gebJahr"
     val gebOrt = findViewById(R.id.eT_gebOrt).asInstanceOf[EditText].getText.toString
     val rb_m = findViewById(R.id.rB_m).asInstanceOf[RadioButton]
     val geschlecht = if (rb_m.isChecked == true) "m" else "w"
     val religion = findViewById(R.id.s_religion).asInstanceOf[Spinner].getSelectedItem.toString
     val famStand = findViewById(R.id.s_famStand).asInstanceOf[Spinner].getSelectedItem.toString
     val staat = findViewById(R.id.s_staat).asInstanceOf[Spinner].getSelectedItem.toString
+
+    gebDatum = checkDate(gebTag, gebMonat, gebJahr)
 
     val persDaten: PersoenlicheDaten = PersoenlicheDaten(nachname, vorname, nachnameVorher, gebDatum, gebOrt, geschlecht, religion, famStand, staat)
 
@@ -145,5 +148,25 @@ class PersoenlicheDatenActivity extends Activity{
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
       spinner.setAdapter(adapter)
     }
+  }
+
+  def checkDate(day: String, month: String, year: String): String = {
+
+    val date = s"$day.$month.$year"
+
+    if (year.toInt % 4 == 0){
+      if (month == "2") {
+        if (day.toInt > 29) return s"29.2.$year"
+      }
+    }
+    else {
+      if (month == "2"){
+        if (day.toInt > 28) return s"28.2.$year"
+      }
+      else if (month == "4" || month == "6" || month == "9" || month == "11") {
+        if (day.toInt > 30) return s"30.$month.$year"
+      }
+    }
+    date
   }
 }
