@@ -12,7 +12,7 @@ class Abmeldung {
   private var tuer: String = ""
   private var plz: String = ""
   private var ort: String = ""
-  private var bundesland: String = ""
+  private var bundesland: String = "Steiermark"
   private var verzugAusAusland: String = "ja"
 
   def getAbmeldungId(): Int = abmeldung_id
