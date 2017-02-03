@@ -12,7 +12,7 @@ import android.widget._
 class AnmeldungActivity extends Activity{
 
   var db: Db = _
-  var person_id = ""
+  var person_id = 0
   val d = new Data
 
   override protected def onCreate(savedInstanceState: Bundle) {
@@ -23,7 +23,7 @@ class AnmeldungActivity extends Activity{
     fillAllSpinner()
 
     val intent: Intent = getIntent
-    person_id = intent.getStringExtra("person_id")
+    person_id = intent.getStringExtra("person_id").toInt
 
     val dataMap = d.fillAnmeldeDaten(db, person_id)
     fillDataInTextView(dataMap, person_id)
@@ -113,11 +113,10 @@ class AnmeldungActivity extends Activity{
 
   def fillAllSpinner(): Unit ={
     fillSpinner(findViewById(R.id.s_anBundesland).asInstanceOf[Spinner], Array("Steiermark", "Kärnten", "Burgenland", "Tirol", "Vorarlberg", "Salzburg", "Niederösterreich", "Oberösterreich", "Wien"))
-  }
 
-  def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
-    val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
-    spinner.setAdapter(adapter)
+    def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
+      val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
+      spinner.setAdapter(adapter)
+    }
   }
-
 }
