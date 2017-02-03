@@ -98,10 +98,10 @@ class PersoenlicheDatenActivity extends Activity{
     persDao.insert(persDaten)
   }
 
-  def getPersonId(): String = {
+  def getPersonId(): Int = {
 
     var someCursor: Option[Cursor] = None
-    var id = ""
+    var id = 0
 
     try {
       someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), null, null, null, null, null))
@@ -123,7 +123,7 @@ class PersoenlicheDatenActivity extends Activity{
 
   def gotoNext(view:View): Unit ={
     saveData(view)
-    val person_id: String = getPersonId()
+    val person_id: Int = getPersonId()
     val i = new Intent(this, classOf[EntscheidungActivity])
     i.putExtra("person_id", person_id)
     startActivity(i)
@@ -140,10 +140,10 @@ class PersoenlicheDatenActivity extends Activity{
     fillSpinner(findViewById(R.id.s_religion).asInstanceOf[Spinner], Array("röm-kath","andere"))
     fillSpinner(findViewById(R.id.s_famStand).asInstanceOf[Spinner], Array("ledig","verheiratet","geschieden","..."))
     fillSpinner(findViewById(R.id.s_staat).asInstanceOf[Spinner], Array("Österreich", "Deutschland", "..."))
-  }
 
-  def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
-    val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
-    spinner.setAdapter(adapter)
+    def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
+      val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
+      spinner.setAdapter(adapter)
+    }
   }
 }

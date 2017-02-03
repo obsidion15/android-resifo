@@ -12,7 +12,7 @@ import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 class FremdeActivity extends Activity{
 
   var db: Db = _
-  var person_id = ""
+  var person_id = 0
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class FremdeActivity extends Activity{
     db = Db(getApplicationContext)
     fillAllSpinner()
     val intent: Intent = getIntent
-    person_id = intent.getStringExtra("person_id")
+    person_id = intent.getStringExtra("person_id").toInt
   }
 
   def saveData(view:View): Unit = {
@@ -43,7 +43,6 @@ class FremdeActivity extends Activity{
   def gotoNext(view: View): Unit ={
     saveData(view)
     val i = new Intent(this, classOf[EntscheidungActivity])
-    i.putExtra("person_id", person_id)
     startActivity(i)
   }
 
@@ -57,11 +56,10 @@ class FremdeActivity extends Activity{
     fillSpinner(findViewById(R.id.s_rdMonat).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_rdJahr).asInstanceOf[Spinner], Array.range(1970,2015 + 1).reverse.map(x => x.toString))
     fillSpinner(findViewById(R.id.s_rdStaat).asInstanceOf[Spinner], Array("USA", "Deutschland", "..."))
-  }
 
-  def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
-    val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
-    spinner.setAdapter(adapter)
+    def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
+      val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
+      spinner.setAdapter(adapter)
+    }
   }
-
 }
