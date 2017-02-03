@@ -27,6 +27,6 @@ mharing;20170202;1;Access to person_id in every Activity
 sgollinger;20170202;8;Return Data form Class Data.scala and implementation of new classes for Person, Abmeldung, Anmeldung and Hauptwohnsitz; Listenansicht eingebaut
 sgollinger;20170203;4;View für die Bearbeitungsfunktionen vorbefüllen
 mharing;20170203;1;Optimization of Activities
-mharing;20170203;1;Implementation of CheckDate
+mharing;20170203;2;Implementation of CheckDate
 
 </pre>
