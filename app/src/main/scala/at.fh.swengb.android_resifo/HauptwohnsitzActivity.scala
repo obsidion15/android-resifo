@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.{ArrayAdapter, EditText, Spinner}
+import android.widget.{ArrayAdapter, EditText, Spinner, TextView}
 
 /**
   * Created by Martin on 15.01.2017.
@@ -13,14 +13,51 @@ class HauptwohnsitzActivity extends Activity{
 
   var db: Db = _
   var person_id = ""
+  val d = new Data
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.hauptwohnsitz)
+
     db = Db(getApplicationContext())
     fillAllSpinner()
+
     val intent: Intent = getIntent
     person_id = intent.getStringExtra("person_id")
+
+    val dataMap = d.fillHwsDaten(db, person_id)
+    fillDataInTextView(dataMap, person_id)
+  }
+
+  def fillDataInTextView(hauptwohnsitzData: Map[Int, Any], person_id: Int) : Unit = {
+    val bundesland = hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getBundesland()
+
+    findViewById(R.id.eT_hwsStraße).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getStrasse())
+    findViewById(R.id.eT_hwsHausNr).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getHausnr())
+    findViewById(R.id.eT_hwsStiege).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getStiege())
+    findViewById(R.id.eT_hwsTuer).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getTuer())
+    findViewById(R.id.eT_hwsPLZ).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getPlz())
+    findViewById(R.id.eT_hwsOrt).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getOrt())
+
+    if(bundesland == "Steiermark") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(0)
+    } else if(bundesland == "Kärnten") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(1)
+    } else if(bundesland == "Burgenland") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(2)
+    } else if(bundesland == "Tirol") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(3)
+    } else if(bundesland == "Vorarlberg") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(4)
+    } else if(bundesland == "Salzburg") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(5)
+    } else if(bundesland == "Niederösterreich") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(6)
+    } else if(bundesland == "Oberösterreich") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(7)
+    } else if(bundesland == "Wien") {
+      findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].setSelection(8)
+    }
   }
 
   def saveData(view: View): Unit = {

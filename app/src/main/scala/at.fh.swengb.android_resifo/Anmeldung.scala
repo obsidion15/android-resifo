@@ -12,9 +12,9 @@ class Anmeldung {
   private var tuer: String = ""
   private var plz: String = ""
   private var ort: String = ""
-  private var bundesland: String = ""
-  private var zuzugAusAusland: String = ""
-  private var hauptwohnsitz: String = ""
+  private var bundesland: String = "Steiermark"
+  private var zuzugAusAusland: String = "ja"
+  private var hauptwohnsitz: String = "ja"
   private var unterkunftgeber: String = ""
 
   def getAnmeldungId(): Int = anmeldung_id

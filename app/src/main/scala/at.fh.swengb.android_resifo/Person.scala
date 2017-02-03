@@ -10,10 +10,10 @@ class Person {
   private var nachnameAlt: String = ""
   private var geburtsdatum: String = ""
   private var geburtsort: String = ""
-  private var geschlecht: String = ""
-  private var religion: String = ""
-  private var familienstand: String = ""
-  private var staatsangehoerigkeit: String = ""
+  private var geschlecht: String = "m"
+  private var religion: String = "röm-kath"
+  private var familienstand: String = "ledig"
+  private var staatsangehoerigkeit: String = "Österreich"
 
   def getPersonId(): Int = person_id
   def getNachname(): String = nachname

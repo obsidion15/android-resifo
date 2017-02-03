@@ -12,7 +12,7 @@ class Hauptwohnsitz {
   private var tuer: String = ""
   private var plz: String = ""
   private var ort: String = ""
-  private var bundesland: String = ""
+  private var bundesland: String = "Steiermark"
 
   def getHauptsitzId(): Int = hauptsitz_id
   def getPersonId(): Int = person_id
