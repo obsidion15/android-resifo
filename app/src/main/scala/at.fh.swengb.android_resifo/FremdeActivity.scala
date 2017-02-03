@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 
+import scala.util.matching.Regex
+
 /**
   * Created by Martin on 19.01.2017.
   */
@@ -30,9 +32,11 @@ class FremdeActivity extends Activity{
     val rdTag = findViewById(R.id.s_rdTag).asInstanceOf[Spinner].getSelectedItem.toString
     val rdMonat = findViewById(R.id.s_rdMonat).asInstanceOf[Spinner].getSelectedItem.toString
     val rdJahr = findViewById(R.id.s_rdJahr).asInstanceOf[Spinner].getSelectedItem.toString
-    val rdDatum = s"$rdTag.$rdMonat.$rdJahr"
+    var rdDatum = s"$rdTag.$rdMonat.$rdJahr"
     val behoerde = findViewById(R.id.eT_rdBehoerde).asInstanceOf[EditText].getText.toString
     val staat = findViewById(R.id.s_rdStaat).asInstanceOf[Spinner].getSelectedItem.toString
+
+    rdDatum = checkDate(rdDatum, rdJahr, rdMonat)
 
     val fremdDaten: FremdeDaten = FremdeDaten(person_id, art, nummer, rdDatum, behoerde, staat)
 
@@ -61,5 +65,24 @@ class FremdeActivity extends Activity{
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
       spinner.setAdapter(adapter)
     }
+  }
+
+  def checkDate(date: String, year: String, month: String): String = {
+
+    val regSchaltjahr: Regex = "((30|31)\\..?2\\.\\d\\d\\d\\d)".r
+    val regFeb: Regex = "((29|30|31)\\..?2\\.\\d\\d\\d\\d)".r
+    val regRest: Regex = "(31\\.(.?4|.?6|.?9|11)\\.\\d\\d\\d\\d)".r
+
+    if (year.toInt % 4 == 0) date match {
+      case regSchaltjahr() => s"28.2.$year"
+      case regRest() => s"30.$month.$year"
+      case _ => date
+    }
+    else date match {
+      case regFeb() => s"28.2.$year"
+      case regRest() => s"30.$month.$year"
+      case _ => date
+    }
+    date
   }
 }

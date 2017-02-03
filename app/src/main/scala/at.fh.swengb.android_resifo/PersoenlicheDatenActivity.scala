@@ -6,6 +6,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.view.View
 import android.widget._
+import scala.util.matching.Regex
 
 /**
   * Created by Martin on 15.01.2017.
@@ -84,13 +85,15 @@ class PersoenlicheDatenActivity extends Activity{
     val gebTag = findViewById(R.id.s_gebTag).asInstanceOf[Spinner].getSelectedItem.toString
     val gebMonat = findViewById(R.id.s_gebMonat).asInstanceOf[Spinner].getSelectedItem.toString
     val gebJahr = findViewById(R.id.s_gebJahr).asInstanceOf[Spinner].getSelectedItem.toString
-    val gebDatum = s"$gebTag.$gebMonat.$gebJahr"
+    var gebDatum = s"$gebTag.$gebMonat.$gebJahr"
     val gebOrt = findViewById(R.id.eT_gebOrt).asInstanceOf[EditText].getText.toString
     val rb_m = findViewById(R.id.rB_m).asInstanceOf[RadioButton]
     val geschlecht = if (rb_m.isChecked == true) "m" else "w"
     val religion = findViewById(R.id.s_religion).asInstanceOf[Spinner].getSelectedItem.toString
     val famStand = findViewById(R.id.s_famStand).asInstanceOf[Spinner].getSelectedItem.toString
     val staat = findViewById(R.id.s_staat).asInstanceOf[Spinner].getSelectedItem.toString
+
+    gebDatum = checkDate(gebDatum, gebJahr, gebMonat)
 
     val persDaten: PersoenlicheDaten = PersoenlicheDaten(nachname, vorname, nachnameVorher, gebDatum, gebOrt, geschlecht, religion, famStand, staat)
 
@@ -145,5 +148,24 @@ class PersoenlicheDatenActivity extends Activity{
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
       spinner.setAdapter(adapter)
     }
+  }
+
+  def checkDate(date: String, year: String, month: String): String = {
+
+    val regSchaltjahr: Regex = "((30|31)\\..?2\\.\\d\\d\\d\\d)".r
+    val regFeb: Regex = "((29|30|31)\\..?2\\.\\d\\d\\d\\d)".r
+    val regRest: Regex = "(31\\.(.?4|.?6|.?9|11)\\.\\d\\d\\d\\d)".r
+
+    if (year.toInt % 4 == 0) date match {
+      case regSchaltjahr() => s"28.2.$year"
+      case regRest() => s"30.$month.$year"
+      case _ => date
+    }
+    else date match {
+      case regFeb() => s"28.2.$year"
+      case regRest() => s"30.$month.$year"
+      case _ => date
+    }
+    date
   }
 }
