@@ -46,7 +46,7 @@ class AbmeldungActivity extends Activity{
   def gotoNext(view:View): Unit ={
     saveData(view)
     val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
-    val i = if (rb_auslandJa.isChecked == true) new Intent(this, classOf[HauptwohnsitzActivity]) else new Intent(this, classOf[ErfolgreichActivity])
+    val i = if (rb_auslandJa.isChecked == true) new Intent(this, classOf[FremdeActivity]) else new Intent(this, classOf[ErfolgreichActivity])
     i.putExtra("person_id", person_id)
     startActivity(i)
   }
