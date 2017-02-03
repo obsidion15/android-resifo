@@ -25,4 +25,5 @@ mharing;20170202;1;Implementation of EntscheidungActivity
 mharing;20170202;1;Full implementation of FremdeActivity
 mharing;20170202;1;Access to person_id in every Activity
 sgollinger;20170202;8;Return Data form Class Data.scala and implementation of new classes for Person, Abmeldung, Anmeldung and Hauptwohnsitz; Listenansicht eingebaut
+sgollinger;20170203;4;View für die Bearbeitungsfunktionen vorbefüllen
 </pre>

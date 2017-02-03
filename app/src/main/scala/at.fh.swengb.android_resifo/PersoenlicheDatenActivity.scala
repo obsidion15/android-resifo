@@ -13,12 +13,67 @@ import android.widget._
 class PersoenlicheDatenActivity extends Activity{
 
   var db: Db = _
+  val d = new Data
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.persoenliche_daten)
-    db = Db(getApplicationContext)
+
+    val intent: Intent = getIntent
+    val person_id: Int = intent.getExtras.get("person_id").asInstanceOf[Int]
+
     fillAllSpinner()
+
+    db = Db(getApplicationContext)
+    val dataMap = d.fillPersDaten(db, person_id)
+    fillDataInTextView(dataMap, person_id)
+  }
+
+  def fillDataInTextView(personData: Map[Int, Any], person_id: Int) : Unit = {
+    val arrGeburtsdatum = personData(person_id).asInstanceOf[Person].getGeburtsdatum()
+    val geschlecht = personData(person_id).asInstanceOf[Person].getGeschlecht()
+    val religion = personData(person_id).asInstanceOf[Person].getReligion()
+    val familienstand = personData(person_id).asInstanceOf[Person].getFamilienstand()
+    val staatsgehoerigkeit = personData(person_id).asInstanceOf[Person].getStaatsangehoerigkeit()
+
+    findViewById(R.id.eT_nachname).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getNachname())
+    findViewById(R.id.eT_vorname).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getVorname())
+    findViewById(R.id.eT_nachnameVorher).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getNachnameAlt())
+
+    //findViewById(R.id.rB_gebDatum).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getGeburtsdatum())
+    findViewById(R.id.eT_gebOrt).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getGeburtsort())
+
+    if(geschlecht == "m") {
+      findViewById(R.id.rB_m).asInstanceOf[RadioButton].setChecked(true)
+      findViewById(R.id.rB_w).asInstanceOf[RadioButton].setChecked(false)
+    } else {
+      findViewById(R.id.rB_m).asInstanceOf[RadioButton].setChecked(false)
+      findViewById(R.id.rB_w).asInstanceOf[RadioButton].setChecked(true)
+    }
+
+    if(religion == "röm-kath") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(0)
+    } else if(religion == "andere") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(1)
+    }
+
+    if(familienstand == "ledig") {
+      findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(0)
+    } else if(familienstand == "verheiratet") {
+      findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(1)
+    } else if(familienstand == "geschieden") {
+      findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(2)
+    } else if(familienstand == "...") {
+      findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(3)
+    }
+
+    if(staatsgehoerigkeit == "Österreich") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(0)
+    } else if (staatsgehoerigkeit == "Deutschland") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(1)
+    } else if (staatsgehoerigkeit == "...") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(2)
+    }
   }
 
   def saveData(view:View): Unit = {

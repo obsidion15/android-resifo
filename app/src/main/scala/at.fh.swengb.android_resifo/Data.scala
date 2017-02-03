@@ -10,8 +10,8 @@ import android.view.View
   */
 class Data {
 
-  def getDataIntoOverview(db: Db, i: Int):Map[String, Iterable[Any]] = {
-    var dataMap: Map[String, Iterable[Any]] = Map()
+  def getDataIntoOverview(db: Db, i: Int):Map[String, Map[Int, Any]] = {
+    var dataMap: Map[String, Map[Int, Any]] = Map()
 
     dataMap = dataMap + ("person" -> fillPersDaten(db, i))
     dataMap = dataMap + ("hauptwohnsitz" -> fillHwsDaten(db, i))
@@ -62,18 +62,20 @@ class Data {
   }
 
   def fillPersDaten(db: Db, i: Int):Map[Int, Person] = {
-    var where:String = ""
-    if(i != 0) {
-      where = "person_id = " + i
+    var someCursor: Option[Cursor] = None
+    val personClass = new Person()
+    var dataMap: Map[Int, Person] = Map(i -> personClass)
+    val where: String = "person_id = " + i
+
+    if(i == 0) {
+      dataMap
     }
 
-    var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Person] = Map()
     try {
       someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname", "nachnameAlt", "geburtsdatum", "geburtsort", "geschlecht", "religion", "familienstand", "staatsangehoerigkeit"), where, null, null, null, null))
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
-          Map()
+          dataMap
         case Some(c) =>
           while (c.moveToNext()) {
             val personClass = new Person()
@@ -95,7 +97,7 @@ class Data {
       }
     } finally {
       someCursor foreach (_.close())
-      Map()
+      dataMap
     }
   }
 
@@ -106,13 +108,14 @@ class Data {
     }
 
     var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Anmeldung] = Map()
+    val anmeldungClass = new Anmeldung()
+    var dataMap: Map[Int, Anmeldung] = Map(i -> anmeldungClass)
     try {
       someCursor = Option(db.getReadableDatabase.query("anmeldung", Array("anmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "zuzugAusAusland", "hauptwohnsitz", "unterkunftgeber"), where, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
-          Map()
+          dataMap
         case Some(c) =>
           while (c.moveToNext()) {
             val anmeldungClass = new Anmeldung()
@@ -130,14 +133,14 @@ class Data {
             anmeldungClass.setHauptwohnsitz(c.getString(c.getColumnIndex("hauptwohnsitz")))
             anmeldungClass.setUnterkunftgeber(c.getString(c.getColumnIndex("unterkunftgeber")))
 
-            dataMap = dataMap + (anmeldungClass.getAnmeldungId() -> anmeldungClass)
+            dataMap = dataMap + (anmeldungClass.getPersonId() -> anmeldungClass)
           }
           dataMap
       }
 
     } finally {
       someCursor foreach (_.close())
-      Map()
+      dataMap
     }
   }
 
@@ -148,13 +151,14 @@ class Data {
     }
 
     var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Hauptwohnsitz] = Map()
+    val hauptsitzClass = new Hauptwohnsitz()
+    var dataMap: Map[Int, Hauptwohnsitz] = Map(i -> hauptsitzClass)
     try {
       someCursor = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland"), where, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
-          Map()
+          dataMap
         case Some(c) =>
           while (c.moveToNext()) {
             val hauptsitzClass = new Hauptwohnsitz()
@@ -169,14 +173,15 @@ class Data {
             hauptsitzClass.setOrt(c.getString(c.getColumnIndex("ort")))
             hauptsitzClass.setBundesland(c.getString(c.getColumnIndex("bundesland"))
             )
-            dataMap = dataMap + (hauptsitzClass.getHauptsitzId() -> hauptsitzClass)
+            dataMap = dataMap + (hauptsitzClass.getPersonId() -> hauptsitzClass)
           }
           dataMap
       }
 
     } finally {
       someCursor foreach (_.close())
-      Map()
+      val hauptsitzClass = new Hauptwohnsitz()
+      return Map(i -> hauptsitzClass)
     }
   }
 
@@ -187,13 +192,14 @@ class Data {
     }
 
     var someCursor: Option[Cursor] = None
-    var dataMap: Map[Int, Abmeldung] = Map()
+    val abmeldungClass = new Abmeldung()
+    var dataMap: Map[Int, Abmeldung] = Map(i -> abmeldungClass)
     try {
       someCursor = Option(db.getReadableDatabase.query("abmeldung", Array("abmeldung_id", "person_id", "strasse", "hausnr", "stiege", "tuer", "plz", "ort", "bundesland", "verzugInsAusland"), where, null, null, null, null))
 
       someCursor match {
         case None => System.err.println("Could not execute query due to some reason")
-          Map()
+          dataMap
         case Some(c) =>
           while (c.moveToNext()) {
             val abmeldungClass = new Abmeldung()
@@ -209,14 +215,14 @@ class Data {
             abmeldungClass.setBundesland(c.getString(c.getColumnIndex("bundesland")))
             abmeldungClass.setVerzugAusAusland(c.getString(c.getColumnIndex("verzugInsAusland")))
 
-            dataMap = dataMap + (abmeldungClass.getAbmeldungId() -> abmeldungClass)
+            dataMap = dataMap + (abmeldungClass.getPersonId() -> abmeldungClass)
           }
           dataMap
       }
 
     } finally {
       someCursor foreach (_.close())
-      Map()
+      dataMap
     }
   }
 
