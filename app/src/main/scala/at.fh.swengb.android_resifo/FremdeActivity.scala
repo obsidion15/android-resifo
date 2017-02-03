@@ -20,7 +20,7 @@ class FremdeActivity extends Activity{
     db = Db(getApplicationContext)
     fillAllSpinner()
     val intent: Intent = getIntent
-    person_id = intent.getStringExtra("person_id").toInt
+    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
   }
 
   def saveData(view:View): Unit = {
