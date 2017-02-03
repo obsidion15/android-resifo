@@ -26,8 +26,6 @@ class AbmeldungActivity extends Activity{
     person_id = intent.getStringExtra("person_id")
   }
 
-  val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
-
   def saveData(view: View): Unit = {
     val strasse = findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString
     val hausnummer = findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString
@@ -36,6 +34,7 @@ class AbmeldungActivity extends Activity{
     val plz = findViewById(R.id.eT_abPLZ).asInstanceOf[EditText].getText.toString
     val ort = findViewById(R.id.eT_abOrt).asInstanceOf[EditText].getText.toString
     val bundesland = findViewById(R.id.s_abBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
+    val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
     val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
 
     val abmeldeDaten: AbmeldeDaten = AbmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland)
@@ -46,6 +45,7 @@ class AbmeldungActivity extends Activity{
 
   def gotoNext(view:View): Unit ={
     saveData(view)
+    val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
     val i = if (rb_auslandJa.isChecked == true) new Intent(this, classOf[HauptwohnsitzActivity]) else new Intent(this, classOf[ErfolgreichActivity])
     i.putExtra("person_id", person_id)
     startActivity(i)
