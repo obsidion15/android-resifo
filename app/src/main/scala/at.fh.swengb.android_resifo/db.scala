@@ -32,6 +32,7 @@ case class Db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 
     //Tabelle Fremde (Reisedokumente)
     val fremDao = SqliteFremDao(db)
     fremDao.init()
+
   }
 
   def mkPersDao(): SqlitePersDao = SqlitePersDao(getWritableDatabase)
