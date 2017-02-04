@@ -144,7 +144,7 @@ class PersoenlicheDatenActivity extends Activity{
     val persDaten: PersoenlicheDaten = PersoenlicheDaten(nachname, vorname, nachnameVorher, gebDatum, gebOrt, geschlecht, religion, famStand, staat)
 
     val persDao = db.mkPersDao()
-    persDao.update(persDaten, fetchPersonId())
+    persDao.updateById(persDaten, fetchPersonId())
   }
 
   def gotoNext(view:View): Unit ={
