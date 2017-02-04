@@ -944,7 +944,7 @@
                     android:id="@+id/b_bestaetigen"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:onClick="gotoErfolgreich" />
+                    android:onClick="goBack" />
 
             </LinearLayout>
 

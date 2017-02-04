@@ -19,10 +19,12 @@ class FremdeActivity extends Activity{
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.reisedokument_fremde)
+
     db = Db(getApplicationContext)
+
     fillAllSpinner()
-    val intent: Intent = getIntent
-    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
+
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
   }
 
   def saveData(view:View): Unit = {
@@ -46,7 +48,7 @@ class FremdeActivity extends Activity{
 
   def gotoNext(view: View): Unit ={
     saveData(view)
-    val i = new Intent(this, classOf[EntscheidungActivity])
+    val i = new Intent(this, classOf[ErfolgreichActivity])
     startActivity(i)
   }
 

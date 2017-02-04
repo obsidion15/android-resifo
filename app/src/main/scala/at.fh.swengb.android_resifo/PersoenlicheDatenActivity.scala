@@ -14,14 +14,14 @@ import scala.util.matching.Regex
 class PersoenlicheDatenActivity extends Activity{
 
   var db: Db = _
+  var person_id = 0
   val d = new Data
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.persoenliche_daten)
 
-    val intent: Intent = getIntent
-    val person_id: Int = intent.getExtras.get("person_id").asInstanceOf[Int]
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
 
     fillAllSpinner()
 
@@ -101,7 +101,7 @@ class PersoenlicheDatenActivity extends Activity{
     persDao.insert(persDaten)
   }
 
-  def getPersonId(): Int = {
+  def fetchPersonId(): Int = {
 
     var someCursor: Option[Cursor] = None
     var id = 0
@@ -124,17 +124,46 @@ class PersoenlicheDatenActivity extends Activity{
     }
   }
 
-  def gotoNext(view:View): Unit ={
-    saveData(view)
-    val person_id: Int = getPersonId()
-    val i = new Intent(this, classOf[EntscheidungActivity])
-    i.putExtra("person_id", person_id)
-    startActivity(i)
+  def updateData(view: View): Unit = {
+    val nachname = findViewById(R.id.eT_nachname).asInstanceOf[EditText].getText.toString
+    val vorname = findViewById(R.id.eT_vorname).asInstanceOf[EditText].getText.toString
+    val nachnameVorher = findViewById(R.id.eT_nachnameVorher).asInstanceOf[EditText].getText.toString
+    val gebTag = findViewById(R.id.s_gebTag).asInstanceOf[Spinner].getSelectedItem.toString
+    val gebMonat = findViewById(R.id.s_gebMonat).asInstanceOf[Spinner].getSelectedItem.toString
+    val gebJahr = findViewById(R.id.s_gebJahr).asInstanceOf[Spinner].getSelectedItem.toString
+    var gebDatum = s"$gebTag.$gebMonat.$gebJahr"
+    val gebOrt = findViewById(R.id.eT_gebOrt).asInstanceOf[EditText].getText.toString
+    val rb_m = findViewById(R.id.rB_m).asInstanceOf[RadioButton]
+    val geschlecht = if (rb_m.isChecked == true) "m" else "w"
+    val religion = findViewById(R.id.s_religion).asInstanceOf[Spinner].getSelectedItem.toString
+    val famStand = findViewById(R.id.s_famStand).asInstanceOf[Spinner].getSelectedItem.toString
+    val staat = findViewById(R.id.s_staat).asInstanceOf[Spinner].getSelectedItem.toString
+
+    gebDatum = checkDate(gebTag, gebMonat, gebJahr)
+
+    val persDaten: PersoenlicheDaten = PersoenlicheDaten(nachname, vorname, nachnameVorher, gebDatum, gebOrt, geschlecht, religion, famStand, staat)
+
+    val persDao = db.mkPersDao()
+    persDao.update(persDaten, fetchPersonId())
   }
 
-  def goBack(view:View): Unit ={
-    finish()
+  def gotoNext(view:View): Unit ={
+    val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
+    if (check == "update") {
+      updateData(view)
+      finish()
+      val i = new Intent(this, classOf[ErfolgreichActivity])
+      startActivity(i)
+    }
+    else {
+      saveData(view)
+      val i = new Intent(this, classOf[EntscheidungActivity])
+      i.putExtra("person_id", fetchPersonId())
+      startActivity(i)
+    }
   }
+
+  def goBack(view:View): Unit = finish()
 
   def fillAllSpinner(): Unit ={
     fillSpinner(findViewById(R.id.s_gebTag).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))

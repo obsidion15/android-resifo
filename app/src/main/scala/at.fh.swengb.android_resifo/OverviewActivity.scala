@@ -11,6 +11,7 @@ import android.widget.TextView
   */
 class OverviewActivity extends Activity{
 
+  var db: Db = _
   val d = new Data
   var person_id: Int = 0
 
@@ -21,9 +22,9 @@ class OverviewActivity extends Activity{
     val intent: Intent = getIntent
     person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
 
-    val db = Db(getApplicationContext())
+    db = Db(getApplicationContext())
     val dataMap = d.getDataIntoOverview(db, person_id)
-    fillDataInTextView(dataMap);
+    fillDataInTextView(dataMap)
   }
 
   def fillDataInTextView(dataMap: Map[String, Map[Int, Any]]): Unit = {
@@ -80,6 +81,7 @@ class OverviewActivity extends Activity{
   def gotoPersoenlicheDaten(view:View): Unit ={
     val i = new Intent(this, classOf[PersoenlicheDatenActivity])
     i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
     startActivity(i)
   }
 
@@ -101,8 +103,8 @@ class OverviewActivity extends Activity{
     startActivity(i)
   }
 
-  def gotoErfolgreich(view:View): Unit ={
-    val i = new Intent(this, classOf[ErfolgreichActivity])
+  def goBack(view:View): Unit ={
+    val i = new Intent(this, classOf[MainActivity])
     startActivity(i)
   }
 }
