@@ -5,6 +5,8 @@ import android.database.sqlite.{SQLiteDatabase, SQLiteOpenHelper}
 
 /**
   * Created by Sabine on 16.01.2017.
+  * Updated a lot.
+  * Really.
   */
 case class Db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 1) {
 
@@ -26,12 +28,18 @@ case class Db(context: Context) extends SQLiteOpenHelper(context, "mydb", null, 
     //Tabelle Abmeldung
     val abmDao = SqliteAbmDao(db)
     abmDao.init()
+
+    //Tabelle Fremde (Reisedokumente)
+    val fremDao = SqliteFremDao(db)
+    fremDao.init()
+
   }
 
   def mkPersDao(): SqlitePersDao = SqlitePersDao(getWritableDatabase)
   def mkAnmDao(): SqliteAnmDao = SqliteAnmDao(getWritableDatabase)
   def mkHwsDao(): SqliteHwsDao = SqliteHwsDao(getWritableDatabase)
   def mkAbmDao(): SqliteAbmDao = SqliteAbmDao(getWritableDatabase)
+  def mkFremDao(): SqliteFremDao = SqliteFremDao(getWritableDatabase)
 }
 
 case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{
@@ -110,6 +118,7 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
 
   def mkContentValues(p: AnmeldeDaten): ContentValues = {
     val cv = new ContentValues
+    cv.put("person_id", p.person_id)
     cv.put("strasse", p.strasse)
     cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
@@ -125,6 +134,7 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
 
   def update(p: AnmeldeDaten): Int = {
     db.update("anmeldung", mkContentValues(p),
+        "person_id = ?, " +
         "strasse = ?, " +
         "hausnr = ?, " +
         "stiege = ?, " +
@@ -134,7 +144,8 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
         "bundesland = ?, " +
         "zuzugAusAusland = ?, " +
         "hauptwohnsitz = ? and" +
-        "unterkunftgeber = ?", Array( p.strasse,
+        "unterkunftgeber = ?", Array( p.person_id.toString,
+                                      p.strasse,
                                       p.hausnummer,
                                       p.stiege,
                                       p.tuer,
@@ -166,6 +177,7 @@ case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
 
   def mkContentValues(p: HauptwohnsitzDaten): ContentValues = {
     val cv = new ContentValues
+    cv.put("person_id", p.person_id)
     cv.put("strasse", p.strasse)
     cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
@@ -178,13 +190,15 @@ case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
 
   def update(p: HauptwohnsitzDaten): Int = {
     db.update("hauptsitz", mkContentValues(p),
+        "person_id = ?, " +
         "strasse = ?, " +
         "hausnr = ?, " +
         "stiege = ?, " +
         "tuer = ?, " +
         "plz = ?," +
         "ort = ? and" +
-        "bundesland = ? ", Array( p.strasse,
+        "bundesland = ? ", Array( p.person_id.toString,
+                                  p.strasse,
                                   p.hausnummer,
                                   p.stiege,
                                   p.tuer,
@@ -214,6 +228,7 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
 
   def mkContentValues(p: AbmeldeDaten): ContentValues = {
     val cv = new ContentValues
+    cv.put("person_id", p.person_id)
     cv.put("strasse", p.strasse)
     cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
@@ -227,6 +242,7 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
 
   def update(p: AbmeldeDaten): Int = {
     db.update("abmeldung", mkContentValues(p),
+        "person_id = ?, " +
         "strasse = ?, " +
         "hausnr = ?, " +
         "stiege = ?, " +
@@ -234,7 +250,8 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
         "plz = ?," +
         "ort = ?," +
         "bundesland = ? and " +
-        "verzugInsAusland = ?", Array(  p.strasse,
+        "verzugInsAusland = ?", Array(  p.person_id.toString,
+                                        p.strasse,
                                         p.hausnummer,
                                         p.stiege,
                                         p.tuer,
@@ -242,6 +259,45 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
                                         p.ort,
                                         p.bundesland,
                                         p.zuzugAusAusland))
+  }
+}
+
+case class SqliteFremDao(db: SQLiteDatabase) extends BaseDao[FremdeDaten]{
+  def init(): Unit = db.execSQL("create table fremde " +
+    " (fremd_id INTEGER PRIMARY KEY ASC, " +
+    "person_id INTEGER, " +
+    "art TEXT, " +
+    "nummer TEXT, " +
+    "datum TEXT, " +
+    "behoerde TEXT, " +
+    "staatsangehoerigkeit TEXT);");
+
+  def insert(p: FremdeDaten): Long = {
+    val cv: ContentValues = mkContentValues(p)
+    db.insert("fremde", null, cv)
+  }
+
+  def mkContentValues(p: FremdeDaten): ContentValues = {
+    val cv = new ContentValues
+    cv.put("art", p.art)
+    cv.put("nummer", p.nummer)
+    cv.put("datum", p.datum)
+    cv.put("behoerde", p.behoerde)
+    cv.put("staatsangehoerigkeit", p.staat)
+    cv
+  }
+
+  def update(p:FremdeDaten): Int = {
+    db.update("fremde", mkContentValues(p),
+        "art = ?, " +
+        "nummer = ?, " +
+        "datum = ?, " +
+        "behoerde = ? and " +
+        "staatsangehoerigkeit = ?", Array(  p.art,
+                                            p.nummer,
+                                            p.datum,
+                                            p.behoerde,
+                                            p.staat))
   }
 }
 

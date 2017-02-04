@@ -29,6 +29,7 @@ class MainActivity extends Activity {
 
   def gotoPersoenlicheDaten(view:View): Unit ={
     val i = new Intent(this, classOf[PersoenlicheDatenActivity])
+    i.putExtra("person_id", 0)
     startActivity(i)
   }
 }

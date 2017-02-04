@@ -11,3 +11,8 @@
 build/
 local.properties
 app/secret/
+
+# more Other Files
+.idea/vcs.xml
+app/libs/
+app/src/main/res/drawable/

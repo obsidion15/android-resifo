@@ -13,7 +13,8 @@ case class PersoenlicheDaten(vorname: String,
                              famStand:String,
                              staat:String)
 
-case class AnmeldeDaten(strasse: String,
+case class AnmeldeDaten(person_id: Int,
+                        strasse: String,
                         hausnummer: String,
                         stiege: String,
                         tuer: String,
@@ -24,7 +25,8 @@ case class AnmeldeDaten(strasse: String,
                         hauptwohnsitz: String,
                         unterkunftgeber: String)
 
-case class HauptwohnsitzDaten(strasse: String,
+case class HauptwohnsitzDaten(person_id: Int,
+                              strasse: String,
                               hausnummer: String,
                               stiege: String,
                               tuer: String,
@@ -32,7 +34,8 @@ case class HauptwohnsitzDaten(strasse: String,
                               ort: String,
                               bundesland: String)
 
-case class AbmeldeDaten(strasse: String,
+case class AbmeldeDaten(person_id: Int,
+                        strasse: String,
                         hausnummer: String,
                         stiege: String,
                         tuer: String,
@@ -40,3 +43,10 @@ case class AbmeldeDaten(strasse: String,
                         ort: String,
                         bundesland: String,
                         zuzugAusAusland: String)
+
+case class FremdeDaten(person_id: Int,
+                       art: String,
+                       nummer: String,
+                       datum: String,
+                       behoerde:String,
+                       staat:String)
