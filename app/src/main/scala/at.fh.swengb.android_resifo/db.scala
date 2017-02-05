@@ -53,7 +53,7 @@ case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{
                                 "geschlecht CHAR, " +
                                 "religion TEXT, " +
                                 "familienstand TEXT, " +
-                                "staatsangehoerigkeit TEXT);");
+                                "staatsangehoerigkeit TEXT);")
 
   def insert(p: PersoenlicheDaten): Long = {
     val cv: ContentValues = mkContentValues(p)
@@ -74,25 +74,8 @@ case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{
     cv
   }
 
-  def update(p:PersoenlicheDaten): Int = {
-    db.update("person", mkContentValues(p),
-        "nachname = ?, " +
-        "vorname = ?, " +
-        "nachnameAlt = ?, " +
-        "geburtsdatum = ?, " +
-        "geburtsort = ?," +
-        "geschlecht = ?," +
-        "religion = ?, " +
-        "familienstand = ? and" +
-        "staatsangehoerigkeit = ?", Array(  p.nachname,
-                                            p.vorname,
-                                            p.nachnameVorher,
-                                            p.gebDatum,
-                                            p.gebOrt,
-                                            p.geschlecht,
-                                            p.religion,
-                                            p.famStand,
-                                            p.staat))
+  def updateById(p:PersoenlicheDaten, id: Int): Int = {
+    db.update("person", mkContentValues(p), "person_id = ?", Array(id.toString))
   }
 }
 
@@ -118,7 +101,7 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
 
   def mkContentValues(p: AnmeldeDaten): ContentValues = {
     val cv = new ContentValues
-    cv.put("person_id", p.person_id)
+    cv.put("person_id", p.person_id.toString)
     cv.put("strasse", p.strasse)
     cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
@@ -132,29 +115,8 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
     cv
   }
 
-  def update(p: AnmeldeDaten): Int = {
-    db.update("anmeldung", mkContentValues(p),
-        "person_id = ?, " +
-        "strasse = ?, " +
-        "hausnr = ?, " +
-        "stiege = ?, " +
-        "tuer = ?, " +
-        "plz = ?," +
-        "ort = ?," +
-        "bundesland = ?, " +
-        "zuzugAusAusland = ?, " +
-        "hauptwohnsitz = ? and" +
-        "unterkunftgeber = ?", Array( p.person_id.toString,
-                                      p.strasse,
-                                      p.hausnummer,
-                                      p.stiege,
-                                      p.tuer,
-                                      p.plz,
-                                      p.ort,
-                                      p.bundesland,
-                                      p.zuzugAusAusland,
-                                      p.hauptwohnsitz,
-                                      p.unterkunftgeber))
+  def updateById(p: AnmeldeDaten, id: Int): Int = {
+    db.update("anmeldung", mkContentValues(p), "person_id = ?", Array( id.toString ))
   }
 }
 
@@ -177,7 +139,7 @@ case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
 
   def mkContentValues(p: HauptwohnsitzDaten): ContentValues = {
     val cv = new ContentValues
-    cv.put("person_id", p.person_id)
+    cv.put("person_id", p.person_id.toString)
     cv.put("strasse", p.strasse)
     cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
@@ -188,23 +150,8 @@ case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
     cv
   }
 
-  def update(p: HauptwohnsitzDaten): Int = {
-    db.update("hauptsitz", mkContentValues(p),
-        "person_id = ?, " +
-        "strasse = ?, " +
-        "hausnr = ?, " +
-        "stiege = ?, " +
-        "tuer = ?, " +
-        "plz = ?," +
-        "ort = ? and" +
-        "bundesland = ? ", Array( p.person_id.toString,
-                                  p.strasse,
-                                  p.hausnummer,
-                                  p.stiege,
-                                  p.tuer,
-                                  p.plz,
-                                  p.ort,
-                                  p.bundesland))
+  def updateById(p: HauptwohnsitzDaten, id: Int): Int = {
+    db.update("hauptsitz", mkContentValues(p), "person_id = ?", Array( id.toString ))
   }
 }
 
@@ -228,7 +175,7 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
 
   def mkContentValues(p: AbmeldeDaten): ContentValues = {
     val cv = new ContentValues
-    cv.put("person_id", p.person_id)
+    cv.put("person_id", p.person_id.toString)
     cv.put("strasse", p.strasse)
     cv.put("hausnr", p.hausnummer)
     cv.put("stiege", p.stiege)
@@ -240,25 +187,8 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
     cv
   }
 
-  def update(p: AbmeldeDaten): Int = {
-    db.update("abmeldung", mkContentValues(p),
-        "person_id = ?, " +
-        "strasse = ?, " +
-        "hausnr = ?, " +
-        "stiege = ?, " +
-        "tuer = ?, " +
-        "plz = ?," +
-        "ort = ?," +
-        "bundesland = ? and " +
-        "verzugInsAusland = ?", Array(  p.person_id.toString,
-                                        p.strasse,
-                                        p.hausnummer,
-                                        p.stiege,
-                                        p.tuer,
-                                        p.plz,
-                                        p.ort,
-                                        p.bundesland,
-                                        p.zuzugAusAusland))
+  def updateById(p: AbmeldeDaten, id: Int): Int = {
+    db.update("abmeldung", mkContentValues(p), "person_id = ?", Array( id.toString ))
   }
 }
 
@@ -287,21 +217,12 @@ case class SqliteFremDao(db: SQLiteDatabase) extends BaseDao[FremdeDaten]{
     cv
   }
 
-  def update(p:FremdeDaten): Int = {
-    db.update("fremde", mkContentValues(p),
-        "art = ?, " +
-        "nummer = ?, " +
-        "datum = ?, " +
-        "behoerde = ? and " +
-        "staatsangehoerigkeit = ?", Array(  p.art,
-                                            p.nummer,
-                                            p.datum,
-                                            p.behoerde,
-                                            p.staat))
+  def updateById(p:FremdeDaten, id: Int): Int = {
+    db.update("fremde", mkContentValues(p), "person_id = ?", Array( id.toString ))
   }
 }
 
 trait BaseDao[T]{
   def insert(t: T): Long
-  def update(t: T): Int
+  def updateById(t: T, v: Int): Int
 }

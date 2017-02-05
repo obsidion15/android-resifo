@@ -17,6 +17,7 @@ class ErfolgreichActivity extends Activity{
 
   def gotoMain(view:View): Unit ={
     val i = new Intent(this, classOf[MainActivity])
+    finish()
     startActivity(i)
   }
 

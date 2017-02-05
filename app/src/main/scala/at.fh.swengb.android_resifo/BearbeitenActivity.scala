@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import android.widget.{AdapterView, EditText, ListView}
+import android.widget.{AdapterView, ListView}
 
 /**
   * Created by Martin on 15.01.2017.
@@ -19,8 +19,8 @@ class BearbeitenActivity extends Activity{
     var myListView = findViewById(R.id.LV_bearbeiten).asInstanceOf[ListView]
 
     db = Db(getApplicationContext())
-    var data = new Data();
-    val list = data.getDataIntoList(db);
+    var data = new Data()
+    val list = data.getDataIntoList(db)
 
     var myAdapter = new PersonAdapter(this, list)
     myListView.setAdapter(myAdapter)

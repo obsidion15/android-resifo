@@ -78,6 +78,7 @@ class HauptwohnsitzActivity extends Activity{
   def gotoNext(view:View): Unit ={
     saveData(view)
     val i = new Intent(this, classOf[ErfolgreichActivity])
+    finish()
     startActivity(i)
   }
 
