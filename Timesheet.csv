@@ -28,5 +28,7 @@ sgollinger;20170202;8;Return Data form Class Data.scala and implementation of ne
 sgollinger;20170203;4;View für die Bearbeitungsfunktionen vorbefüllen
 mharing;20170203;1;Optimization of Activities
 mharing;20170203;2;Implementation of CheckDate
-
+mharing;20170204;2;Initial implementation of updateById
+mharing;20170204;2;Correct linking of Activities, OverviewActivity overhaul
+mstangl;20170205;2;logo, adjustments
 </pre>

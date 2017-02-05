@@ -11,6 +11,7 @@ import android.widget.TextView
   */
 class OverviewActivity extends Activity{
 
+  var db: Db = _
   val d = new Data
   var person_id: Int = 0
 
@@ -18,19 +19,18 @@ class OverviewActivity extends Activity{
     super.onCreate(savedInstanceState)
     setContentView(R.layout.overview)
 
-    val intent: Intent = getIntent
-    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
 
-    val db = Db(getApplicationContext())
+    db = Db(getApplicationContext())
     val dataMap = d.getDataIntoOverview(db, person_id)
-    fillDataInTextView(dataMap);
+    fillDataInTextView(dataMap)
   }
 
   def fillDataInTextView(dataMap: Map[String, Map[Int, Any]]): Unit = {
       val personData = dataMap("person")
-      val anmeldungData = dataMap("anmeldung")
+//      val anmeldungData = dataMap("anmeldung")
       val hauptwohnsitzData = dataMap("hauptwohnsitz")
-      val abmeldungData = dataMap("abmeldung")
+//      val abmeldungData = dataMap("abmeldung")
 
       //Personen Daten
       findViewById(R.id.eT_nachname).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getNachname())
@@ -42,7 +42,7 @@ class OverviewActivity extends Activity{
       findViewById(R.id.s_religion).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getReligion())
       findViewById(R.id.s_familienstand).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getFamilienstand())
       findViewById(R.id.s_staat).asInstanceOf[TextView].setText(personData(person_id).asInstanceOf[Person].getStaatsangehoerigkeit())
-
+/*
       //Anmeldung Daten
       findViewById(R.id.eT_anStraße).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getStrasse())
       findViewById(R.id.eT_anHausNr).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getHausnr())
@@ -54,7 +54,7 @@ class OverviewActivity extends Activity{
       findViewById(R.id.rB_anAusland).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getZuzugAusAusland())
       findViewById(R.id.rB_anHWS).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getHauptwohnsitz())
       findViewById(R.id.eT_anNameUG).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getUnterkunftgeber())
-
+*/
       //Hauptwohnsitz Daten
       findViewById(R.id.eT_hwsStraße).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getStrasse())
       findViewById(R.id.eT_hwsHausNr).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getHausnr())
@@ -63,7 +63,7 @@ class OverviewActivity extends Activity{
       findViewById(R.id.eT_hwsPLZ).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getPlz())
       findViewById(R.id.eT_hwsOrt).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getOrt())
       findViewById(R.id.s_hwsBundesland).asInstanceOf[TextView].setText(hauptwohnsitzData(person_id).asInstanceOf[Hauptwohnsitz].getBundesland())
-
+/*
       //Abmeldung Daten
       findViewById(R.id.eT_abStraße).asInstanceOf[TextView].setText(abmeldungData(person_id).asInstanceOf[Abmeldung].getStrasse())
       findViewById(R.id.eT_abHausNr).asInstanceOf[TextView].setText(abmeldungData(person_id).asInstanceOf[Abmeldung].getHausnr())
@@ -73,36 +73,38 @@ class OverviewActivity extends Activity{
       findViewById(R.id.eT_abOrt).asInstanceOf[TextView].setText(abmeldungData(person_id).asInstanceOf[Abmeldung].getOrt())
       findViewById(R.id.s_abBundesland).asInstanceOf[TextView].setText(abmeldungData(person_id).asInstanceOf[Abmeldung].getBundesland())
       findViewById(R.id.rB_abAusland).asInstanceOf[TextView].setText(abmeldungData(person_id).asInstanceOf[Abmeldung].getVerzugAusAusland())
-
+*/
   }
 
 
   def gotoPersoenlicheDaten(view:View): Unit ={
     val i = new Intent(this, classOf[PersoenlicheDatenActivity])
     i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
     startActivity(i)
   }
-
+/*
   def gotoAnmeldung(view:View): Unit ={
     val i = new Intent(this, classOf[AnmeldungActivity])
     i.putExtra("person_id", person_id)
     startActivity(i)
   }
-
-  def gotoHauptwohnsitz(view:View): Unit ={
+*/
+  def gotoHauptwohnsitz(view:View): Unit = {
     val i = new Intent(this, classOf[HauptwohnsitzActivity])
     i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
     startActivity(i)
   }
-
+/*
   def gotoAbmeldung(view:View): Unit ={
     val i = new Intent(this, classOf[AbmeldungActivity])
     i.putExtra("person_id", person_id)
     startActivity(i)
   }
-
-  def gotoErfolgreich(view:View): Unit ={
-    val i = new Intent(this, classOf[ErfolgreichActivity])
+*/
+  def goBack(view:View): Unit ={
+    val i = new Intent(this, classOf[MainActivity])
     startActivity(i)
   }
 }
