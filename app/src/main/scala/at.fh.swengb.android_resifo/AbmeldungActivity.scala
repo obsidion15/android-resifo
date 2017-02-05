@@ -93,16 +93,45 @@ class AbmeldungActivity extends Activity{
     hwsDao.insert(hwsDaten)
   }
 
-  def gotoNext(view:View): Unit ={
-    saveData(view)
+  def updateData(view: View) = {
+    val strasse = findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString
+    val stiege = findViewById(R.id.eT_abStiege).asInstanceOf[EditText].getText.toString
+    val tuer = findViewById(R.id.eT_abTuer).asInstanceOf[EditText].getText.toString
+    val plz = findViewById(R.id.eT_abPLZ).asInstanceOf[EditText].getText.toString
+    val ort = findViewById(R.id.eT_abOrt).asInstanceOf[EditText].getText.toString
+    val bundesland = findViewById(R.id.s_abBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
-    val i = if (rb_auslandJa.isChecked == true) new Intent(this, classOf[FremdeActivity]) else new Intent(this, classOf[ErfolgreichActivity])
+    val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
+
+    val abmeldeDaten: AbmeldeDaten = AbmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland)
+    val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
+
+    val abmDao = db.mkAbmDao()
+    abmDao.insert(abmeldeDaten)
+
+    val hwsDao = db.mkHwsDao()
+    hwsDao.deleteById(person_id)
+    hwsDao.insert(hwsDaten)
+  }
+
+  def gotoNext(view:View): Unit ={
+    val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
+    val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
+    val i = if (rb_auslandJa.isChecked() == true) new Intent(this, classOf[FremdeActivity]) else new Intent(this, classOf[ErfolgreichActivity])
     i.putExtra("person_id", person_id)
+
+    if (check == "update") updateData(view) else saveData(view)
+
+    finish()
     startActivity(i)
   }
 
   def goBack(view:View): Unit ={
+    val i = new Intent(this, classOf[EntscheidungActivity])
+    i.putExtra("person_id", person_id)
     finish()
+    startActivity(i)
   }
 
   def fillAllSpinner(): Unit ={

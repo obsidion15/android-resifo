@@ -81,6 +81,7 @@ class OverviewActivity extends Activity{
     val i = new Intent(this, classOf[PersoenlicheDatenActivity])
     i.putExtra("person_id", person_id)
     i.putExtra("update", "update")
+    finish()
     startActivity(i)
   }
 /*
@@ -94,6 +95,7 @@ class OverviewActivity extends Activity{
     val i = new Intent(this, classOf[HauptwohnsitzActivity])
     i.putExtra("person_id", person_id)
     i.putExtra("update", "update")
+    finish()
     startActivity(i)
   }
 /*

@@ -49,11 +49,16 @@ class FremdeActivity extends Activity{
   def gotoNext(view: View): Unit ={
     saveData(view)
     val i = new Intent(this, classOf[ErfolgreichActivity])
+    finish()
     startActivity(i)
   }
 
   def goBack(view:View): Unit ={
+    val i = new Intent(this, classOf[AbmeldungActivity])
+    i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
     finish()
+    startActivity(i)
   }
 
   def fillAllSpinner(): Unit ={

@@ -94,17 +94,30 @@ class HauptwohnsitzActivity extends Activity{
     val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
     if (check == "update") {
       updateData(view)
-      finish()
     }
     else {
       saveData(view)
     }
     val i = new Intent(this, classOf[ErfolgreichActivity])
+    finish()
     startActivity(i)
   }
 
   def goBack(view:View): Unit ={
-    finish()
+    val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
+    if (check == "update"){
+      val i = new Intent(this, classOf[OverviewActivity])
+      i.putExtra("person_id", person_id)
+      finish()
+      startActivity(i)
+    }
+    else {
+      val i = new Intent(this, classOf[AnmeldungActivity])
+      i.putExtra("person_id", person_id)
+      i.putExtra("update", "update")
+      finish()
+      startActivity(i)
+    }
   }
 
   def fillAllSpinner(): Unit ={

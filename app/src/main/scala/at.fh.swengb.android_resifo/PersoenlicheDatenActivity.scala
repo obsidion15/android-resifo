@@ -149,21 +149,43 @@ class PersoenlicheDatenActivity extends Activity{
 
   def gotoNext(view:View): Unit ={
     val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
+    val doubleCheck: String = getIntent.getExtras.get("update2").asInstanceOf[String]
     if (check == "update") {
       updateData(view)
-      finish()
-      val i = new Intent(this, classOf[ErfolgreichActivity])
-      startActivity(i)
+      if (doubleCheck == "update2"){
+        val i = new Intent(this, classOf[EntscheidungActivity])
+        finish()
+        startActivity(i)
+      }
+      else{
+        val i = new Intent(this, classOf[ErfolgreichActivity])
+        finish()
+        startActivity(i)
+      }
     }
     else {
       saveData(view)
       val i = new Intent(this, classOf[EntscheidungActivity])
       i.putExtra("person_id", fetchPersonId())
+      finish()
       startActivity(i)
     }
   }
 
-  def goBack(view:View): Unit = finish()
+  def goBack(view:View): Unit = {
+    val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
+    if (check == "update"){
+      val i = new Intent(this, classOf[OverviewActivity])
+      i.putExtra("person_id", person_id)
+      finish()
+      startActivity(i)
+    }
+    else{
+      val i = new Intent(this, classOf[MainActivity])
+      finish()
+      startActivity(i)
+    }
+  }
 
   def fillAllSpinner(): Unit ={
     fillSpinner(findViewById(R.id.s_gebTag).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))

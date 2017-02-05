@@ -31,6 +31,7 @@ class BearbeitenActivity extends Activity{
         //val selectedItem = myAdapter.getItem(position) + 1
         val intent = new Intent(view.getContext, classOf[OverviewActivity])
         intent.putExtra("person_id",position + 1)
+        finish()
         startActivity(intent)
       }
     })
