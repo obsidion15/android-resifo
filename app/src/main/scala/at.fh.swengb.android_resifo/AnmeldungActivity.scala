@@ -1,11 +1,10 @@
 package at.fh.swengb.android_resifo
 
 import android.app.Activity
-import android.content.{ContentValues, Intent}
-import android.database.Cursor
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
+import android.widget._
 
 /**
   * Created by Martin on 15.01.2017.
@@ -13,12 +12,71 @@ import android.widget.{ArrayAdapter, EditText, RadioButton, Spinner}
 class AnmeldungActivity extends Activity{
 
   var db: Db = _
+  var person_id = 0
+  val d = new Data
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.anmeldung)
+
     db = Db(getApplicationContext())
     fillAllSpinner()
+
+    val intent: Intent = getIntent
+    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
+
+    val dataMap = d.fillAnmeldeDaten(db, person_id)
+    fillDataInTextView(dataMap, person_id)
+  }
+
+  def fillDataInTextView(anmeldungData: Map[Int, Any], person_id: Int) : Unit = {
+    val bundesland = anmeldungData(person_id).asInstanceOf[Anmeldung].getBundesland()
+    val anAusland = anmeldungData(person_id).asInstanceOf[Anmeldung].getZuzugAusAusland()
+    val hauptwohnsitzCheckbox = anmeldungData(person_id).asInstanceOf[Anmeldung].getHauptwohnsitz()
+
+    findViewById(R.id.eT_anStraße).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getStrasse())
+    findViewById(R.id.eT_anHausNr).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getHausnr())
+    findViewById(R.id.eT_anStiege).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getStiege())
+    findViewById(R.id.eT_anTuer).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getTuer())
+    findViewById(R.id.eT_anPLZ).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getPlz())
+    findViewById(R.id.eT_anOrt).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getOrt())
+
+    if(bundesland == "Steiermark") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(0)
+    } else if(bundesland == "Kärnten") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(1)
+    } else if(bundesland == "Burgenland") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(2)
+    } else if(bundesland == "Tirol") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(3)
+    } else if(bundesland == "Vorarlberg") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(4)
+    } else if(bundesland == "Salzburg") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(5)
+    } else if(bundesland == "Niederösterreich") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(6)
+    } else if(bundesland == "Oberösterreich") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(7)
+    } else if(bundesland == "Wien") {
+      findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].setSelection(8)
+    }
+
+    if(anAusland == "ja") {
+      findViewById(R.id.rB_anAuslandJa).asInstanceOf[RadioButton].setChecked(true)
+      findViewById(R.id.rB_anAuslandNein).asInstanceOf[RadioButton].setChecked(false)
+    } else {
+      findViewById(R.id.rB_anAuslandJa).asInstanceOf[RadioButton].setChecked(false)
+      findViewById(R.id.rB_anAuslandNein).asInstanceOf[RadioButton].setChecked(true)
+    }
+
+    if(hauptwohnsitzCheckbox == "ja") {
+      findViewById(R.id.rB_anHWSJa).asInstanceOf[RadioButton].setChecked(true)
+      findViewById(R.id.rB_anHWSNein).asInstanceOf[RadioButton].setChecked(false)
+    } else {
+      findViewById(R.id.rB_anHWSJa).asInstanceOf[RadioButton].setChecked(false)
+      findViewById(R.id.rB_anHWSNein).asInstanceOf[RadioButton].setChecked(true)
+    }
+    findViewById(R.id.eT_anNameUG).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getUnterkunftgeber())
   }
 
   def saveData(view: View): Unit = {
@@ -30,19 +88,22 @@ class AnmeldungActivity extends Activity{
     val ort = findViewById(R.id.eT_anOrt).asInstanceOf[EditText].getText.toString
     val bundesland = findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val rb_auslandJa = findViewById(R.id.rB_anAuslandJa).asInstanceOf[RadioButton]
-    val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
     val rb_HWSJa = findViewById(R.id.rB_anHWSJa).asInstanceOf[RadioButton]
+    val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
     val hws = if (rb_HWSJa.isChecked == true) "ja" else "nein"
     val nameUG = findViewById(R.id.eT_anNameUG).asInstanceOf[EditText].getText.toString
 
-    val anmeldeDaten: AnmeldeDaten = AnmeldeDaten(strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland, hws, nameUG)
+    val anmeldeDaten: AnmeldeDaten = AnmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland, hws, nameUG)
 
     val anmDao = db.mkAnmDao()
     anmDao.insert(anmeldeDaten)
   }
 
-  def gotoHauptwohnsitz(view:View): Unit ={
-    val i = new Intent(this, classOf[HauptwohnsitzActivity])
+  def gotoNext(view:View): Unit ={
+    saveData(view)
+    val rb_HWSJa = findViewById(R.id.rB_anHWSJa).asInstanceOf[RadioButton]
+    val i = if (rb_HWSJa.isChecked == false) new Intent(this, classOf[HauptwohnsitzActivity]) else new Intent(this, classOf[ErfolgreichActivity])
+    i.putExtra("person_id", person_id)
     startActivity(i)
   }
 
@@ -52,11 +113,10 @@ class AnmeldungActivity extends Activity{
 
   def fillAllSpinner(): Unit ={
     fillSpinner(findViewById(R.id.s_anBundesland).asInstanceOf[Spinner], Array("Steiermark", "Kärnten", "Burgenland", "Tirol", "Vorarlberg", "Salzburg", "Niederösterreich", "Oberösterreich", "Wien"))
-  }
 
-  def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
-    val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
-    spinner.setAdapter(adapter)
+    def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
+      val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
+      spinner.setAdapter(adapter)
+    }
   }
-
 }
