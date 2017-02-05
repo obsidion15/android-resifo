@@ -1,8 +1,11 @@
+*iml
+
 # Package Files #
 *.jar
 
 # Other Files
 .gradle/
+gradle/
 .idea/compiler.xml
 .idea/copyright/
 .idea/gradle.xml
@@ -16,3 +19,4 @@ app/secret/
 .idea/vcs.xml
 app/libs/
 app/src/main/res/drawable/
+android-resifo.iml
