@@ -51,28 +51,82 @@ class PersoenlicheDatenActivity extends Activity{
       findViewById(R.id.rB_w).asInstanceOf[RadioButton].setChecked(true)
     }
 
-    if(religion == "röm-kath") {
+    if(religion == "Christentum") {
       findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(0)
-    } else if(religion == "andere") {
+    } else if(religion == "Judentum") {
       findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(1)
+    } else if(religion == "Islam") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(2)
+    } else if(religion == "Hinduismus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(3)
+    } else if(religion == "Buddhismus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(4)
+    } else if(religion == "Taoismus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(5)
+    } else if(religion == "Atheismus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(6)
+    } else if(religion == "Sikhismus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(7)
+    } else if(religion == "Mormonentum") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(8)
+    } else if(religion == "Juche") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(9)
+    } else if(religion == "Spiritimus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(10)
+    } else if(religion == "Baha'i") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(11)
+    } else if(religion == "Jainismus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(12)
+    } else if(religion == "Shinto") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(13)
+    } else if(religion == "Cao Dai") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(14)
+    } else if(religion == "Tenrikyo") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(15)
+    } else if(religion == "Anhänger Cthulus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(16)
+    } else if(religion == "Pastafarianismus") {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(17)
+    } else {
+      findViewById(R.id.s_religion).asInstanceOf[Spinner].setSelection(18)
     }
 
     if(familienstand == "ledig") {
       findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(0)
     } else if(familienstand == "verheiratet") {
       findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(1)
-    } else if(familienstand == "geschieden") {
+    } else if(familienstand == "verwitwet") {
       findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(2)
-    } else if(familienstand == "...") {
+    } else if(familienstand == "geschieden") {
       findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(3)
+    } else if(familienstand == "Ehe aufgehoben") {
+      findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(4)
+    } else if(familienstand == "in Lebenspartnerschaft") {
+      findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(5)
+    } else {
+      findViewById(R.id.s_famStand).asInstanceOf[Spinner].setSelection(6)
     }
 
     if(staatsgehoerigkeit == "Österreich") {
       findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(0)
     } else if (staatsgehoerigkeit == "Deutschland") {
       findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(1)
-    } else if (staatsgehoerigkeit == "...") {
+    } else if (staatsgehoerigkeit == "Schweiz") {
       findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(2)
+    } else if (staatsgehoerigkeit == "Italien") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(3)
+    } else if (staatsgehoerigkeit == "Tschechien") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(4)
+    } else if (staatsgehoerigkeit == "Ungarn") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(5)
+    } else if (staatsgehoerigkeit == "Slowakei") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(6)
+    } else if (staatsgehoerigkeit == "Slowenien") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(7)
+    } else if (staatsgehoerigkeit == "Liechtenstein") {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(8)
+    } else {
+      findViewById(R.id.s_staat).asInstanceOf[Spinner].setSelection(9)
     }
   }
 
@@ -187,9 +241,9 @@ class PersoenlicheDatenActivity extends Activity{
     fillSpinner(findViewById(R.id.s_gebTag).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_gebMonat).asInstanceOf[Spinner], Array.range(1,12 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_gebJahr).asInstanceOf[Spinner], Array.range(1970,2015 + 1).reverse.map(x => x.toString))
-    fillSpinner(findViewById(R.id.s_religion).asInstanceOf[Spinner], Array("röm-kath","andere"))
-    fillSpinner(findViewById(R.id.s_famStand).asInstanceOf[Spinner], Array("ledig","verheiratet","geschieden","..."))
-    fillSpinner(findViewById(R.id.s_staat).asInstanceOf[Spinner], Array("Österreich", "Deutschland", "..."))
+    fillSpinner(findViewById(R.id.s_religion).asInstanceOf[Spinner], Array("Christentum", "Judentum", "Islam", "Hinduismus", "Buddhismus", "Taoismus", "Atheismus", "Sikhismus", "Mormonentum", "Juche", "Spiritimus", "Baha'i", "Jainismus", "Shinto", "Cao Dai", "Tenrikyo", "Anhänger Cthulus", "Pastafarianismus", "keine der oben genannten"))
+    fillSpinner(findViewById(R.id.s_famStand).asInstanceOf[Spinner], Array("ledig", "verheiratet", "verwitwet", "geschieden", "Ehe aufgehoben", "in Lebenspartnerschaft", "nicht bekannt"))
+    fillSpinner(findViewById(R.id.s_staat).asInstanceOf[Spinner], Array("Österreich", "Deutschland", "Schweiz", "Italien", "Tschechien", "Ungarn", "Slowakei", "Slowenien", "Liechtenstein", "keiner der oben genannten"))
 
     def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)

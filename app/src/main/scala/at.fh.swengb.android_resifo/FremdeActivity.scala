@@ -59,11 +59,11 @@ class FremdeActivity extends Activity{
   }
 
   def fillAllSpinner(): Unit ={
-    fillSpinner(findViewById(R.id.s_rdArt).asInstanceOf[Spinner], Array("kompliziert", "..."))
+    fillSpinner(findViewById(R.id.s_rdArt).asInstanceOf[Spinner], Array("Reisepass", "Personalausweis", "keine der oben genannten"))
     fillSpinner(findViewById(R.id.s_rdTag).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_rdMonat).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_rdJahr).asInstanceOf[Spinner], Array.range(1970,2015 + 1).reverse.map(x => x.toString))
-    fillSpinner(findViewById(R.id.s_rdStaat).asInstanceOf[Spinner], Array("USA", "Deutschland", "..."))
+    fillSpinner(findViewById(R.id.s_rdStaat).asInstanceOf[Spinner], Array("USA", "Russland", "Brasilien", "Chile", "Skandinavien", "Alaska", "Kanada", "China", "Japan", "keiner der oben genannten"))
 
     def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
