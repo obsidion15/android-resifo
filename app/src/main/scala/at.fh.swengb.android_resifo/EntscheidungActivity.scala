@@ -10,14 +10,13 @@ import android.view.View
   */
 class EntscheidungActivity extends Activity{
 
-  var person_id = ""
+  var person_id = 0
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.entscheidung)
 
-    val intent: Intent = getIntent
-    person_id = intent.getStringExtra("person_id")
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
   }
 
   def gotoAnmeldung(view:View): Unit ={
