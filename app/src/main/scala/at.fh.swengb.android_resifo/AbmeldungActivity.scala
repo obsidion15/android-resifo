@@ -73,12 +73,12 @@ class AbmeldungActivity extends Activity{
   }
 */
   def saveData(view: View): Unit = {
-    val strasse = findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString
-    val hausnummer = findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString
-    val stiege = findViewById(R.id.eT_abStiege).asInstanceOf[EditText].getText.toString
-    val tuer = findViewById(R.id.eT_abTuer).asInstanceOf[EditText].getText.toString
-    val plz = findViewById(R.id.eT_abPLZ).asInstanceOf[EditText].getText.toString
-    val ort = findViewById(R.id.eT_abOrt).asInstanceOf[EditText].getText.toString
+    val strasse = checkText(findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString)
+    val hausnummer = checkNumber(findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString)
+    val stiege = checkNumber(findViewById(R.id.eT_abStiege).asInstanceOf[EditText].getText.toString)
+    val tuer = checkNumber(findViewById(R.id.eT_abTuer).asInstanceOf[EditText].getText.toString)
+    val plz = checkPlz(findViewById(R.id.eT_abPLZ).asInstanceOf[EditText].getText.toString)
+    val ort = checkText(findViewById(R.id.eT_abOrt).asInstanceOf[EditText].getText.toString)
     val bundesland = findViewById(R.id.s_abBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
     val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
@@ -94,12 +94,12 @@ class AbmeldungActivity extends Activity{
   }
 
   def updateData(view: View) = {
-    val strasse = findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString
-    val hausnummer = findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString
-    val stiege = findViewById(R.id.eT_abStiege).asInstanceOf[EditText].getText.toString
-    val tuer = findViewById(R.id.eT_abTuer).asInstanceOf[EditText].getText.toString
-    val plz = findViewById(R.id.eT_abPLZ).asInstanceOf[EditText].getText.toString
-    val ort = findViewById(R.id.eT_abOrt).asInstanceOf[EditText].getText.toString
+    val strasse = checkText(findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString)
+    val hausnummer = checkNumber(findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString)
+    val stiege = checkNumber(findViewById(R.id.eT_abStiege).asInstanceOf[EditText].getText.toString)
+    val tuer = checkNumber(findViewById(R.id.eT_abTuer).asInstanceOf[EditText].getText.toString)
+    val plz = checkPlz(findViewById(R.id.eT_abPLZ).asInstanceOf[EditText].getText.toString)
+    val ort = checkText(findViewById(R.id.eT_abOrt).asInstanceOf[EditText].getText.toString)
     val bundesland = findViewById(R.id.s_abBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val rb_auslandJa = findViewById(R.id.rB_abAuslandJa).asInstanceOf[RadioButton]
     val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
@@ -140,6 +140,30 @@ class AbmeldungActivity extends Activity{
     def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
       spinner.setAdapter(adapter)
+    }
+  }
+
+  def checkText(name: String): String = {
+    val check = ".*\d.*".r
+    name match {
+      case `check` => name.replace("1","i").replace("2","z").replace("3","e").replace("4","a").replace("5","s").replace("6","g").replace("7","t").replace("8","b").replace("9","p").replace("0","o")
+      case _ => name
+    }
+  }
+
+  def checkNumber(number: String): String = {
+    val check = ".*\s.*".r
+    number match {
+      case `check` => ""
+      case _ => number
+    }
+  }
+
+  def checkPlz(plz: String) = {
+    val check = "\d\d\d\d".r
+    plz match {
+      case `check` => plz
+      case _ => ""
     }
   }
 }
