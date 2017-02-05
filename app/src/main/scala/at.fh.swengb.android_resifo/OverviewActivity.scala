@@ -2,9 +2,10 @@ package at.fh.swengb.android_resifo
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import android.widget.{EditText, TextView}
 
 /**
   * Created by Martin on 16.01.2017.
@@ -98,13 +99,26 @@ class OverviewActivity extends Activity{
     finish()
     startActivity(i)
   }
-/*
-  def gotoAbmeldung(view:View): Unit ={
-    val i = new Intent(this, classOf[AbmeldungActivity])
-    i.putExtra("person_id", person_id)
-    startActivity(i)
+
+  def fetchLocation(): String = {
+    val strasse = findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString
+    s"$strasse $hausnummer"
   }
-*/
+
+  /*
+    def gotoAbmeldung(view:View): Unit ={
+      val i = new Intent(this, classOf[AbmeldungActivity])
+      i.putExtra("person_id", person_id)
+      startActivity(i)
+    }
+  */
+  def gotoMaps(view: View): Unit ={
+    val location: Uri = Uri.parse("geo:0,0?q=" + fetchLocation())
+    val mapIntent: Intent = new Intent(Intent.ACTION_VIEW, location)
+    startActivity(mapIntent)
+  }
+
   def goBack(view:View): Unit ={
     val i = new Intent(this, classOf[MainActivity])
     finish()

@@ -436,15 +436,24 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="100dp">
+
+                <Button
+                    android:text="IN GOOGLE MAPS ZEIGEN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/b_bestaetigen"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:onClick="gotoMaps" />
 
                 <Button
                     android:text="BESTÄTIGEN"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/b_bestaetigen"
+                    android:id="@+id/button4"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
                     android:onClick="goBack" />
