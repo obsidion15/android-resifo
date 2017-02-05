@@ -45,11 +45,11 @@ class Data {
               case None => System.err.println("Could not execute query for some reason")
               case Some(cHw) =>
                 while (cHw.moveToNext()) {
-                  hauptsitzClass.setHauptsitzId(c.getInt(c.getColumnIndex("hauptsitz_id")))
-                  hauptsitzClass.setStrasse(c.getString(c.getColumnIndex("strasse")))
-                  hauptsitzClass.setHausnr(c.getString(c.getColumnIndex("hausnr")))
-                  hauptsitzClass.setPlz(c.getString(c.getColumnIndex("plz")))
-                  hauptsitzClass.setOrt(c.getString(c.getColumnIndex("ort")))
+                  hauptsitzClass.setHauptsitzId(cHw.getInt(cHw.getColumnIndex("hauptsitz_id")))
+                  hauptsitzClass.setStrasse(cHw.getString(cHw.getColumnIndex("strasse")))
+                  hauptsitzClass.setHausnr(cHw.getString(cHw.getColumnIndex("hausnr")))
+                  hauptsitzClass.setPlz(cHw.getString(cHw.getColumnIndex("plz")))
+                  hauptsitzClass.setOrt(cHw.getString(cHw.getColumnIndex("ort")))
                 }
             }
             dataMap = dataMap + (personClass.getPersonId() -> List(personClass, hauptsitzClass))
