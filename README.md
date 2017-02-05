@@ -3,8 +3,9 @@
 <img src="KAreg%20logo.jpg">
 
 <h2>Tired of all the bureaucratic paper work when changing your residence?</h2>
-<img src="project_management/meldezettel.JPG">
-<b>Not any longer with the KAreg Meldezettel App!</b>
+<img src="/Mr-Get/android-resifo/raw/master/KAreg%20logo.jpg" style="width:200px; float:right;">
+
+<p><b>Not any longer with the KAreg Meldezettel App!</b></p>
 
 <h2>Why?</h2>
 <p>When moving to Austria or changing the place of your residence you are legally bound to inform two austrian authoritys of your relocation. First the municipal office of your old city, this is called "Abmelden", second the municipal office of your new city which is called "Anmelden. The deadline to do this is <b>only three days</b> from the day you move into your new accomodation! We help you save time by providing an easy way to do so.</p>
