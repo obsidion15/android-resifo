@@ -24,6 +24,7 @@ class MainActivity extends Activity {
 
   def gotoBearbeiten(view: View): Unit = {
     val i = new Intent(this, classOf[BearbeitenActivity])
+    finish()
     startActivity(i)
   }
 
