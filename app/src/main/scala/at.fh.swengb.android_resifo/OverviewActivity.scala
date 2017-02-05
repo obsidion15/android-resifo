@@ -107,6 +107,7 @@ class OverviewActivity extends Activity{
 */
   def goBack(view:View): Unit ={
     val i = new Intent(this, classOf[MainActivity])
+    finish()
     startActivity(i)
   }
 }
