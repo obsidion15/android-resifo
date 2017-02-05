@@ -216,21 +216,29 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
-                    android:text="ja"
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cB_anAuslandJa"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.67" >
 
-                <CheckBox
-                    android:text="nein"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cB_anAuslandNein"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    <RadioButton
+                        android:text="ja"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_anAuslandJa"
+                        android:layout_weight="1"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:text="nein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_anAuslandNein"
+                        android:layout_weight="1" />
+
+                </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -247,21 +255,29 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
-                    android:text="ja"
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cB_anHWSJa"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.67" >
 
-                <CheckBox
-                    android:text="nein"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cB_anHWSNein"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    <RadioButton
+                        android:text="ja"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_anHWSJa"
+                        android:layout_weight="1"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:text="nein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_anHWSNein"
+                        android:layout_weight="1" />
+
+                </RadioGroup>
+
             </LinearLayout>
 
 
@@ -303,7 +319,7 @@
                     android:id="@+id/b_anZurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoPersoenlicheDaten" />
+                    android:onClick="goBack" />
 
                 <Button
                     android:text="WEITER"
@@ -312,7 +328,7 @@
                     android:id="@+id/b_anWeiter"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoHauptwohnsitz" />
+                    android:onClick="gotoNext" />
             </LinearLayout>
 
         </LinearLayout>

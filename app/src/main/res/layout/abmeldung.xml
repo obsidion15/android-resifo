@@ -216,21 +216,29 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
-                    android:text="ja"
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cB_abAuslandJa"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.67" >
 
-                <CheckBox
-                    android:text="nein"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cB_abAuslandNein"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    <RadioButton
+                        android:text="ja"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_abAuslandJa"
+                        android:layout_weight="1"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:text="nein"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rb_abAuslandNein"
+                        android:layout_weight="1"
+                        android:elevation="0dp" />
+                </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -246,7 +254,7 @@
                     android:id="@+id/b_abZurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoHauptwohnsitz" />
+                    android:onClick="goBack" />
 
                 <Button
                     android:text="WEITER"
@@ -255,7 +263,7 @@
                     android:id="@+id/b_abWeiter"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoErfolgreich" />
+                    android:onClick="gotoNext" />
             </LinearLayout>
 
         </LinearLayout>

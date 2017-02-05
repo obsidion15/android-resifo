@@ -24,11 +24,14 @@ class MainActivity extends Activity {
 
   def gotoBearbeiten(view: View): Unit = {
     val i = new Intent(this, classOf[BearbeitenActivity])
+    finish()
     startActivity(i)
   }
 
   def gotoPersoenlicheDaten(view:View): Unit ={
     val i = new Intent(this, classOf[PersoenlicheDatenActivity])
+    i.putExtra("person_id", 0)
+    finish()
     startActivity(i)
   }
 }

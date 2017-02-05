@@ -178,7 +178,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp">
 
                 <TextView
                     android:text="Geschlecht"
@@ -189,21 +190,28 @@
                     android:textSize="18sp"
                     android:layout_marginTop="5dp" />
 
-                <CheckBox
-                    android:text="männlich"
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:layout_width="205dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cB_m"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    android:orientation="horizontal">
 
-                <CheckBox
-                    android:text="weiblich"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cB_w"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp" />
+                    <RadioButton
+                        android:text="männlich"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_m"
+                        android:layout_weight="1"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:text="weiblich"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rB_w"
+                        android:layout_weight="1" />
+
+                </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -288,7 +296,7 @@
                     android:id="@+id/b_zurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoMain" />
+                    android:onClick="goBack" />
 
                 <Button
                     android:text="WEITER"
@@ -297,7 +305,7 @@
                     android:id="@+id/b_weiter"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoAnmeldung" />
+                    android:onClick="gotoNext" />
             </LinearLayout>
 
         </LinearLayout>

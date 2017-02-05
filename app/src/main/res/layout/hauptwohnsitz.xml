@@ -216,7 +216,7 @@
                     android:id="@+id/b_hwsZurueck"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoAnmeldung" />
+                    android:onClick="goBack" />
 
                 <Button
                     android:text="WEITER"
@@ -225,7 +225,7 @@
                     android:id="@+id/b_hwsWeiter"
                     android:layout_weight="1"
                     android:layout_marginTop="5dp"
-                    android:onClick="gotoAbmeldung" />
+                    android:onClick="gotoNext" />
             </LinearLayout>
 
         </LinearLayout>
