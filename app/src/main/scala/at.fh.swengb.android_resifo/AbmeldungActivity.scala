@@ -25,13 +25,13 @@ class AbmeldungActivity extends Activity{
     db = Db(getApplicationContext())
     fillAllSpinner()
 
-    val intent: Intent = getIntent
-    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
-
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
+/*
     val dataMap = d.fillAbmeldeDaten(db, person_id)
     fillDataInTextView(dataMap, person_id)
+*/
   }
-
+/*
   def fillDataInTextView(abmeldungData: Map[Int, Any], person_id: Int) : Unit = {
     val bundesland = abmeldungData(person_id).asInstanceOf[Abmeldung].getBundesland()
     val verzugAusAusland = abmeldungData(person_id).asInstanceOf[Abmeldung].getVerzugAusAusland()
@@ -71,8 +71,7 @@ class AbmeldungActivity extends Activity{
       findViewById(R.id.rb_abAuslandNein).asInstanceOf[RadioButton].setChecked(true)
     }
   }
-
-
+*/
   def saveData(view: View): Unit = {
     val strasse = findViewById(R.id.eT_abStraße).asInstanceOf[EditText].getText.toString
     val hausnummer = findViewById(R.id.eT_abHausNr).asInstanceOf[EditText].getText.toString
@@ -85,9 +84,13 @@ class AbmeldungActivity extends Activity{
     val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
 
     val abmeldeDaten: AbmeldeDaten = AbmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland)
+    val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
 
     val abmDao = db.mkAbmDao()
     abmDao.insert(abmeldeDaten)
+
+    val hwsDao = db.mkHwsDao()
+    hwsDao.insert(hwsDaten)
   }
 
   def gotoNext(view:View): Unit ={

@@ -21,6 +21,7 @@ class Data {
   }
 
   def getDataIntoList(db: Db):Map[Int, List[Any]] = {
+
     var someCursor: Option[Cursor] = None
     var someCursorHw: Option[Cursor] = None
     var dataMap: Map[Int, List[Any]] = Map()
@@ -28,7 +29,7 @@ class Data {
     try {
       someCursor = Option(db.getReadableDatabase.query("person", Array("person_id", "nachname", "vorname"), null, null, null, null, null))
       someCursor match {
-        case None => System.err.println("Could not execute query due to some reason")
+        case None => System.err.println("Could not execute query for some reason")
           Map()
         case Some(c) =>
           while (c.moveToNext()) {
@@ -39,9 +40,9 @@ class Data {
             personClass.setNachname(c.getString(c.getColumnIndex("nachname")))
             personClass.setVorname(c.getString(c.getColumnIndex("vorname")))
 
-            someCursorHw = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "plz", "ort"), "person_id = " + personClass.getPersonId(), null, null, null, null))
+            someCursorHw = Option(db.getReadableDatabase.query("hauptsitz", Array("hauptsitz_id", "person_id", "strasse", "hausnr", "plz", "ort"), "person_id = ?", Array(personClass.getPersonId().toString), null, null, null))
             someCursorHw match {
-              case None => System.err.println("Could not execute query due to some reason")
+              case None => System.err.println("Could not execute query for some reason")
               case Some(cHw) =>
                 while (cHw.moveToNext()) {
                   hauptsitzClass.setHauptsitzId(c.getInt(c.getColumnIndex("hauptsitz_id")))

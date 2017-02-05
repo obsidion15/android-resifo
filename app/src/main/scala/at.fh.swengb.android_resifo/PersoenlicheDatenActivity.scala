@@ -6,7 +6,6 @@ import android.content.Intent
 import android.database.Cursor
 import android.view.View
 import android.widget._
-import scala.util.matching.Regex
 
 /**
   * Created by Martin on 15.01.2017.
@@ -144,7 +143,8 @@ class PersoenlicheDatenActivity extends Activity{
     val persDaten: PersoenlicheDaten = PersoenlicheDaten(nachname, vorname, nachnameVorher, gebDatum, gebOrt, geschlecht, religion, famStand, staat)
 
     val persDao = db.mkPersDao()
-    persDao.updateById(persDaten, fetchPersonId())
+    persDao.deleteById(person_id)
+    persDao.insert(persDaten)
   }
 
   def gotoNext(view:View): Unit ={

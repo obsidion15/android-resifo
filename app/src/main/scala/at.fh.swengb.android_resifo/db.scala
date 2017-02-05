@@ -74,9 +74,7 @@ case class SqlitePersDao(db: SQLiteDatabase) extends BaseDao[PersoenlicheDaten]{
     cv
   }
 
-  def updateById(p:PersoenlicheDaten, id: Int): Int = {
-    db.update("person", mkContentValues(p), "person_id = ?", Array(id.toString))
-  }
+  def deleteById(id: Int): Int =  db.delete("person", "person_id = ?", Array(id.toString))
 }
 
 case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
@@ -115,9 +113,8 @@ case class SqliteAnmDao(db: SQLiteDatabase) extends BaseDao[AnmeldeDaten]{
     cv
   }
 
-  def updateById(p: AnmeldeDaten, id: Int): Int = {
-    db.update("anmeldung", mkContentValues(p), "person_id = ?", Array( id.toString ))
-  }
+  def deleteById(id: Int): Int = db.delete("anmeldung", "person_id = ?", Array(id.toString))
+
 }
 
 case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
@@ -150,9 +147,8 @@ case class SqliteHwsDao(db: SQLiteDatabase) extends BaseDao[HauptwohnsitzDaten]{
     cv
   }
 
-  def updateById(p: HauptwohnsitzDaten, id: Int): Int = {
-    db.update("hauptsitz", mkContentValues(p), "person_id = ?", Array( id.toString ))
-  }
+  def deleteById(id: Int): Int = db.delete("hauptsitz", "person_id = ?", Array(id.toString))
+
 }
 
 case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
@@ -187,9 +183,8 @@ case class SqliteAbmDao(db: SQLiteDatabase) extends BaseDao[AbmeldeDaten]{
     cv
   }
 
-  def updateById(p: AbmeldeDaten, id: Int): Int = {
-    db.update("abmeldung", mkContentValues(p), "person_id = ?", Array( id.toString ))
-  }
+  def deleteById(id: Int): Int = db.delete("abmeldung", "person_id = ?", Array(id.toString))
+
 }
 
 case class SqliteFremDao(db: SQLiteDatabase) extends BaseDao[FremdeDaten]{
@@ -217,12 +212,10 @@ case class SqliteFremDao(db: SQLiteDatabase) extends BaseDao[FremdeDaten]{
     cv
   }
 
-  def updateById(p:FremdeDaten, id: Int): Int = {
-    db.update("fremde", mkContentValues(p), "person_id = ?", Array( id.toString ))
-  }
+  def deleteById(id: Int): Int = db.delete("fremde", "person_id = ?", Array(id.toString))
+
 }
 
 trait BaseDao[T]{
   def insert(t: T): Long
-  def updateById(t: T, v: Int): Int
 }

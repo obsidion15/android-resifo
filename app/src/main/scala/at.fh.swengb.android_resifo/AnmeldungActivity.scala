@@ -22,13 +22,13 @@ class AnmeldungActivity extends Activity{
     db = Db(getApplicationContext())
     fillAllSpinner()
 
-    val intent: Intent = getIntent
-    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
-
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
+/*
     val dataMap = d.fillAnmeldeDaten(db, person_id)
     fillDataInTextView(dataMap, person_id)
+*/
   }
-
+/*
   def fillDataInTextView(anmeldungData: Map[Int, Any], person_id: Int) : Unit = {
     val bundesland = anmeldungData(person_id).asInstanceOf[Anmeldung].getBundesland()
     val anAusland = anmeldungData(person_id).asInstanceOf[Anmeldung].getZuzugAusAusland()
@@ -78,7 +78,7 @@ class AnmeldungActivity extends Activity{
     }
     findViewById(R.id.eT_anNameUG).asInstanceOf[TextView].setText(anmeldungData(person_id).asInstanceOf[Anmeldung].getUnterkunftgeber())
   }
-
+*/
   def saveData(view: View): Unit = {
     val strasse = findViewById(R.id.eT_anStraße).asInstanceOf[EditText].getText.toString
     val hausnummer = findViewById(R.id.eT_anHausNr).asInstanceOf[EditText].getText.toString
@@ -97,6 +97,12 @@ class AnmeldungActivity extends Activity{
 
     val anmDao = db.mkAnmDao()
     anmDao.insert(anmeldeDaten)
+
+    if (hws == "ja"){
+      val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
+      val hwsDao = db.mkHwsDao()
+      hwsDao.insert(hwsDaten)
+    }
   }
 
   def gotoNext(view:View): Unit ={

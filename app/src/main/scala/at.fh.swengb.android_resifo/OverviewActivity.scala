@@ -19,8 +19,7 @@ class OverviewActivity extends Activity{
     super.onCreate(savedInstanceState)
     setContentView(R.layout.overview)
 
-    val intent: Intent = getIntent
-    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
 
     db = Db(getApplicationContext())
     val dataMap = d.getDataIntoOverview(db, person_id)
@@ -91,9 +90,10 @@ class OverviewActivity extends Activity{
     startActivity(i)
   }
 */
-  def gotoHauptwohnsitz(view:View): Unit ={
+  def gotoHauptwohnsitz(view:View): Unit = {
     val i = new Intent(this, classOf[HauptwohnsitzActivity])
     i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
     startActivity(i)
   }
 /*
