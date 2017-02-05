@@ -1,9 +1,9 @@
 <h1>KAreg Meldezettel App</h1>
 <p>The KAreg Meldezettel App provides an easy way to inform the austrian authorities about your relocation.</p>
-<img src="KAreg%20logo.jpg">
+<img src="KAreg%20logo.jpg" style="width:200px; float:right;">
 
 <h2>Tired of all the bureaucratic paper work when changing your residence?</h2>
-<img src="/Mr-Get/android-resifo/raw/master/KAreg%20logo.jpg" style="width:200px; float:right;">
+<img src="project_management/meldezettel.JPG">
 
 <p><b>Not any longer with the KAreg Meldezettel App!</b></p>
 
