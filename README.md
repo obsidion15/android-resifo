@@ -5,6 +5,7 @@
 
 <h2>Tired of all the bureaucratic paper work when changing your residence?</h2>
 <img src="project_management/meldezettel.gif">
+<br>
 <b>Not any longer with the KAreg Meldezettel App!</b>
 
 <h2>Why?</h2>
@@ -15,7 +16,7 @@
 Screenshots
 
 <h1>Prerequisites</h1>
-<p>Text</p>
+<p>An android smartphone with at least Android 5.1.</p>
 
 <h1>FAQ</h1>
 <p><span style="color:red;"><b>ATTENTION! This App was developed for a project at Fachhochschule Joanneum Graz. It does not actually send your data to the austrian authoritys, but only saves it locally on your device!</b></span></p>
@@ -24,17 +25,14 @@ Screenshots
 <h4>Is this app an official app from the austrian government?</h4>
 <p>No! This app was developed during a project at FH Joanneum GmbH Graz. It is not official and should not accually be used to register a new accomodation! You can find more information about the programmers in the <a href="Team.md">Team.md</a> file.</p>
 
-<h4>Frage</h4>
-<p>Text</p>
-HINWEIS das Daten nicht tatsächlich abgeschickt werden
-Can man sich auch abmelden
+
 
 <h1>LICENCE</h1>
-<p>You can find the license at <a href="LICENSE.txt">LICENSE.txt</a>.</p>
+<p>You can find the license in the <a href="LICENSE.txt">LICENSE.txt</a> file.</p>
 
 <h1>Contributors</h1>
 <p>You can find the contributors in the <a href="Team.md">Team.md</a> file.</p>
 
 <h1>Releases</h1>
-<p>Text</p>
+<p>06.02.2017 - Version 1.0</p>
 
