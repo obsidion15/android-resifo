@@ -28,17 +28,14 @@ class FremdeActivity extends Activity{
   }
 
   def saveData(view:View): Unit = {
-
     val art = findViewById(R.id.s_rdArt).asInstanceOf[Spinner].getSelectedItem.toString
-    val nummer = findViewById(R.id.eT_rdNummer).asInstanceOf[EditText].getText.toString
+    val nummer = checkNumber(findViewById(R.id.eT_rdNummer).asInstanceOf[EditText].getText.toString)
     val rdTag = findViewById(R.id.s_rdTag).asInstanceOf[Spinner].getSelectedItem.toString
     val rdMonat = findViewById(R.id.s_rdMonat).asInstanceOf[Spinner].getSelectedItem.toString
     val rdJahr = findViewById(R.id.s_rdJahr).asInstanceOf[Spinner].getSelectedItem.toString
-    var rdDatum = s"$rdTag.$rdMonat.$rdJahr"
-    val behoerde = findViewById(R.id.eT_rdBehoerde).asInstanceOf[EditText].getText.toString
+    val rdDatum = checkDate(rdTag, rdMonat, rdJahr)
+    val behoerde = checkText(findViewById(R.id.eT_rdBehoerde).asInstanceOf[EditText].getText.toString)
     val staat = findViewById(R.id.s_rdStaat).asInstanceOf[Spinner].getSelectedItem.toString
-
-    rdDatum = checkDate(rdTag, rdMonat, rdJahr)
 
     val fremdDaten: FremdeDaten = FremdeDaten(person_id, art, nummer, rdDatum, behoerde, staat)
 
@@ -49,19 +46,24 @@ class FremdeActivity extends Activity{
   def gotoNext(view: View): Unit ={
     saveData(view)
     val i = new Intent(this, classOf[ErfolgreichActivity])
+    finish()
     startActivity(i)
   }
 
   def goBack(view:View): Unit ={
+    val i = new Intent(this, classOf[AbmeldungActivity])
+    i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
     finish()
+    startActivity(i)
   }
 
   def fillAllSpinner(): Unit ={
-    fillSpinner(findViewById(R.id.s_rdArt).asInstanceOf[Spinner], Array("kompliziert", "..."))
+    fillSpinner(findViewById(R.id.s_rdArt).asInstanceOf[Spinner], Array("Reisepass", "Personalausweis", "keine der oben genannten"))
     fillSpinner(findViewById(R.id.s_rdTag).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_rdMonat).asInstanceOf[Spinner], Array.range(1,31 + 1).map(x => x.toString))
     fillSpinner(findViewById(R.id.s_rdJahr).asInstanceOf[Spinner], Array.range(1970,2015 + 1).reverse.map(x => x.toString))
-    fillSpinner(findViewById(R.id.s_rdStaat).asInstanceOf[Spinner], Array("USA", "Deutschland", "..."))
+    fillSpinner(findViewById(R.id.s_rdStaat).asInstanceOf[Spinner], Array("USA", "Russland", "Brasilien", "Chile", "Skandinavien", "Alaska", "Kanada", "China", "Japan", "keiner der oben genannten"))
 
     def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
@@ -87,5 +89,21 @@ class FremdeActivity extends Activity{
       }
     }
     date
+  }
+
+  def checkText(name: String): String = {
+    val check = ".*\d.*".r
+    name match {
+      case `check` => name.replace("1","i").replace("2","z").replace("3","e").replace("4","a").replace("5","s").replace("6","g").replace("7","t").replace("8","b").replace("9","p").replace("0","o")
+      case _ => name
+    }
+  }
+
+  def checkNumber(number: String): String = {
+    val check = ".*\s.*".r
+    number match {
+      case `check` => ""
+      case _ => number
+    }
   }
 }

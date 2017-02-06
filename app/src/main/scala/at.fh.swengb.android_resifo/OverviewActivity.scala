@@ -2,9 +2,10 @@ package at.fh.swengb.android_resifo
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
+import android.widget.{EditText, TextView}
 
 /**
   * Created by Martin on 16.01.2017.
@@ -19,8 +20,7 @@ class OverviewActivity extends Activity{
     super.onCreate(savedInstanceState)
     setContentView(R.layout.overview)
 
-    val intent: Intent = getIntent
-    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
 
     db = Db(getApplicationContext())
     val dataMap = d.getDataIntoOverview(db, person_id)
@@ -82,6 +82,7 @@ class OverviewActivity extends Activity{
     val i = new Intent(this, classOf[PersoenlicheDatenActivity])
     i.putExtra("person_id", person_id)
     i.putExtra("update", "update")
+    finish()
     startActivity(i)
   }
 /*
@@ -91,20 +92,36 @@ class OverviewActivity extends Activity{
     startActivity(i)
   }
 */
-  def gotoHauptwohnsitz(view:View): Unit ={
+  def gotoHauptwohnsitz(view:View): Unit = {
     val i = new Intent(this, classOf[HauptwohnsitzActivity])
     i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
+    finish()
     startActivity(i)
   }
-/*
-  def gotoAbmeldung(view:View): Unit ={
-    val i = new Intent(this, classOf[AbmeldungActivity])
-    i.putExtra("person_id", person_id)
-    startActivity(i)
+
+  def fetchLocation(): String = {
+    val strasse = findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString
+    s"$strasse $hausnummer"
   }
-*/
+
+  /*
+    def gotoAbmeldung(view:View): Unit ={
+      val i = new Intent(this, classOf[AbmeldungActivity])
+      i.putExtra("person_id", person_id)
+      startActivity(i)
+    }
+  */
+  def gotoMaps(view: View): Unit ={
+    val location: Uri = Uri.parse("geo:0,0?q=" + fetchLocation())
+    val mapIntent: Intent = new Intent(Intent.ACTION_VIEW, location)
+    startActivity(mapIntent)
+  }
+
   def goBack(view:View): Unit ={
     val i = new Intent(this, classOf[MainActivity])
+    finish()
     startActivity(i)
   }
 }

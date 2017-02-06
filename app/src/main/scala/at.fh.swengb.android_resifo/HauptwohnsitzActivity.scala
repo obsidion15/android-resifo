@@ -22,8 +22,7 @@ class HauptwohnsitzActivity extends Activity{
     db = Db(getApplicationContext())
     fillAllSpinner()
 
-    val intent: Intent = getIntent
-    person_id = intent.getExtras.get("person_id").asInstanceOf[Int]
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
 
     val dataMap = d.fillHwsDaten(db, person_id)
     fillDataInTextView(dataMap, person_id)
@@ -61,12 +60,12 @@ class HauptwohnsitzActivity extends Activity{
   }
 
   def saveData(view: View): Unit = {
-    val strasse = findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString
-    val hausnummer = findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString
-    val stiege = findViewById(R.id.eT_hwsStiege).asInstanceOf[EditText].getText.toString
-    val tuer = findViewById(R.id.eT_hwsTuer).asInstanceOf[EditText].getText.toString
-    val plz = findViewById(R.id.eT_hwsPLZ).asInstanceOf[EditText].getText.toString
-    val ort = findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString
+    val strasse = checkText(findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString)
+    val hausnummer = checkNumber(findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString)
+    val stiege = checkNumber(findViewById(R.id.eT_hwsStiege).asInstanceOf[EditText].getText.toString)
+    val tuer = checkNumber(findViewById(R.id.eT_hwsTuer).asInstanceOf[EditText].getText.toString)
+    val plz = checkPlz(findViewById(R.id.eT_hwsPLZ).asInstanceOf[EditText].getText.toString)
+    val ort = checkText(findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString)
     val bundesland = findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
 
     val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
@@ -75,15 +74,50 @@ class HauptwohnsitzActivity extends Activity{
     hwsDao.insert(hwsDaten)
   }
 
+  def updateData(view: View) = {
+    val strasse = checkText(findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString)
+    val hausnummer = checkNumber(findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString)
+    val stiege = checkNumber(findViewById(R.id.eT_hwsStiege).asInstanceOf[EditText].getText.toString)
+    val tuer = checkNumber(findViewById(R.id.eT_hwsTuer).asInstanceOf[EditText].getText.toString)
+    val plz = checkPlz(findViewById(R.id.eT_hwsPLZ).asInstanceOf[EditText].getText.toString)
+    val ort = checkText(findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString)
+    val bundesland = findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
+
+    val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
+
+    val hwsDao = db.mkHwsDao()
+    hwsDao.deleteById(person_id)
+    hwsDao.insert(hwsDaten)
+  }
+
   def gotoNext(view:View): Unit ={
-    saveData(view)
+    val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
+    if (check == "update") {
+      updateData(view)
+    }
+    else {
+      saveData(view)
+    }
     val i = new Intent(this, classOf[ErfolgreichActivity])
     finish()
     startActivity(i)
   }
 
   def goBack(view:View): Unit ={
-    finish()
+    val check: String = getIntent.getExtras.get("update").asInstanceOf[String]
+    if (check == "update"){
+      val i = new Intent(this, classOf[OverviewActivity])
+      i.putExtra("person_id", person_id)
+      finish()
+      startActivity(i)
+    }
+    else {
+      val i = new Intent(this, classOf[AnmeldungActivity])
+      i.putExtra("person_id", person_id)
+      i.putExtra("update", "update")
+      finish()
+      startActivity(i)
+    }
   }
 
   def fillAllSpinner(): Unit ={
@@ -92,6 +126,30 @@ class HauptwohnsitzActivity extends Activity{
     def fillSpinner(spinner: Spinner, content: Array[String]): Unit ={
       val adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, content)
       spinner.setAdapter(adapter)
+    }
+  }
+
+  def checkText(name: String): String = {
+    val check = ".*\d.*".r
+    name match {
+      case `check` => name.replace("1","i").replace("2","z").replace("3","e").replace("4","a").replace("5","s").replace("6","g").replace("7","t").replace("8","b").replace("9","p").replace("0","o")
+      case _ => name
+    }
+  }
+
+  def checkNumber(number: String): String = {
+    val check = ".*\s.*".r
+    number match {
+      case `check` => ""
+      case _ => number
+    }
+  }
+
+  def checkPlz(plz: String) = {
+    val check = "\d\d\d\d".r
+    plz match {
+      case `check` => plz
+      case _ => ""
     }
   }
 }

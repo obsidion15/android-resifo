@@ -10,29 +10,35 @@ import android.view.View
   */
 class EntscheidungActivity extends Activity{
 
-  var person_id = ""
+  var person_id = 0
 
   override protected def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.entscheidung)
 
-    val intent: Intent = getIntent
-    person_id = intent.getStringExtra("person_id")
+    person_id = getIntent.getExtras.get("person_id").asInstanceOf[Int]
   }
 
   def gotoAnmeldung(view:View): Unit ={
     val i = new Intent(this, classOf[AnmeldungActivity])
     i.putExtra("person_id", person_id)
+    finish()
     startActivity(i)
   }
 
   def gotoAbmeldung(view:View): Unit ={
     val i = new Intent(this, classOf[AbmeldungActivity])
     i.putExtra("person_id", person_id)
+    finish()
     startActivity(i)
   }
 
   def goBack(view:View): Unit ={
+    val i = new Intent(this, classOf[PersoenlicheDatenActivity])
+    i.putExtra("person_id", person_id)
+    i.putExtra("update", "update")
+    i.putExtra("update2", "update2")
     finish()
+    startActivity(i)
   }
 }
