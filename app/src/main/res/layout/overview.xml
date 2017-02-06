@@ -37,6 +37,14 @@
                     android:layout_weight="1"
                     android:layout_marginBottom="20dp" />
 
+                <Button
+                    android:text="BEARBEITEN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/b_editPers"
+                    android:layout_weight="1"
+                    android:onClick="gotoPersoenlicheDaten" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -219,7 +227,8 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="28dp">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <TextView
                     android:text="Staatsangehörigkeit"
@@ -256,6 +265,14 @@
                         android:textStyle="normal|bold"
                         android:layout_weight="1"
                         android:layout_marginBottom="20dp" />
+
+                    <Button
+                        android:text="BEARbEITEN"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/b_editHws"
+                        android:layout_weight="1"
+                        android:onClick="gotoHauptwohnsitz" />
 
                 </LinearLayout>
 
