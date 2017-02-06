@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.{ArrayAdapter, EditText, Spinner, TextView}
+import scala.util.matching.Regex
 
 /**
   * Created by Martin on 15.01.2017.
@@ -60,12 +61,12 @@ class HauptwohnsitzActivity extends Activity{
   }
 
   def saveData(view: View): Unit = {
-    val strasse = checkText(findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString)
-    val hausnummer = checkNumber(findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString)
-    val stiege = checkNumber(findViewById(R.id.eT_hwsStiege).asInstanceOf[EditText].getText.toString)
-    val tuer = checkNumber(findViewById(R.id.eT_hwsTuer).asInstanceOf[EditText].getText.toString)
-    val plz = checkPlz(findViewById(R.id.eT_hwsPLZ).asInstanceOf[EditText].getText.toString)
-    val ort = checkText(findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString)
+    val strasse = findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString
+    val stiege = findViewById(R.id.eT_hwsStiege).asInstanceOf[EditText].getText.toString
+    val tuer = findViewById(R.id.eT_hwsTuer).asInstanceOf[EditText].getText.toString
+    val plz = findViewById(R.id.eT_hwsPLZ).asInstanceOf[EditText].getText.toString
+    val ort = findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString
     val bundesland = findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
 
     val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
@@ -75,12 +76,12 @@ class HauptwohnsitzActivity extends Activity{
   }
 
   def updateData(view: View) = {
-    val strasse = checkText(findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString)
-    val hausnummer = checkNumber(findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString)
-    val stiege = checkNumber(findViewById(R.id.eT_hwsStiege).asInstanceOf[EditText].getText.toString)
-    val tuer = checkNumber(findViewById(R.id.eT_hwsTuer).asInstanceOf[EditText].getText.toString)
-    val plz = checkPlz(findViewById(R.id.eT_hwsPLZ).asInstanceOf[EditText].getText.toString)
-    val ort = checkText(findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString)
+    val strasse = findViewById(R.id.eT_hwsStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_hwsHausNr).asInstanceOf[EditText].getText.toString
+    val stiege = findViewById(R.id.eT_hwsStiege).asInstanceOf[EditText].getText.toString
+    val tuer = findViewById(R.id.eT_hwsTuer).asInstanceOf[EditText].getText.toString
+    val plz = findViewById(R.id.eT_hwsPLZ).asInstanceOf[EditText].getText.toString
+    val ort = findViewById(R.id.eT_hwsOrt).asInstanceOf[EditText].getText.toString
     val bundesland = findViewById(R.id.s_hwsBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
 
     val hwsDaten: HauptwohnsitzDaten = HauptwohnsitzDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland)
@@ -128,9 +129,9 @@ class HauptwohnsitzActivity extends Activity{
       spinner.setAdapter(adapter)
     }
   }
-
+/*
   def checkText(name: String): String = {
-    val check = ".*\d.*".r
+    val check: Regex = ".*\d.*".r
     name match {
       case `check` => name.replace("1","i").replace("2","z").replace("3","e").replace("4","a").replace("5","s").replace("6","g").replace("7","t").replace("8","b").replace("9","p").replace("0","o")
       case _ => name
@@ -138,7 +139,7 @@ class HauptwohnsitzActivity extends Activity{
   }
 
   def checkNumber(number: String): String = {
-    val check = ".*\s.*".r
+    val check: Regex = ".*\s.*".r
     number match {
       case `check` => ""
       case _ => number
@@ -146,10 +147,11 @@ class HauptwohnsitzActivity extends Activity{
   }
 
   def checkPlz(plz: String) = {
-    val check = "\d\d\d\d".r
+    val check: Regex = "\d\d\d\d".r
     plz match {
       case `check` => plz
       case _ => ""
     }
   }
+  */
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget._
+import scala.util.matching.Regex
 
 /**
   * Created by Martin on 15.01.2017.
@@ -80,18 +81,18 @@ class AnmeldungActivity extends Activity{
   }
 */
   def saveData(view: View): Unit = {
-    val strasse = checkText(findViewById(R.id.eT_anStraße).asInstanceOf[EditText].getText.toString)
-    val hausnummer = checkNumber(findViewById(R.id.eT_anHausNr).asInstanceOf[EditText].getText.toString)
-    val stiege = checkNumber(findViewById(R.id.eT_anStiege).asInstanceOf[EditText].getText.toString)
-    val tuer = checkNumber(findViewById(R.id.eT_anTuer).asInstanceOf[EditText].getText.toString)
-    val plz = checkPlz(findViewById(R.id.eT_anPLZ).asInstanceOf[EditText].getText.toString)
-    val ort = checkText(findViewById(R.id.eT_anOrt).asInstanceOf[EditText].getText.toString)
+    val strasse = findViewById(R.id.eT_anStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_anHausNr).asInstanceOf[EditText].getText.toString
+    val stiege = findViewById(R.id.eT_anStiege).asInstanceOf[EditText].getText.toString
+    val tuer = findViewById(R.id.eT_anTuer).asInstanceOf[EditText].getText.toString
+    val plz = findViewById(R.id.eT_anPLZ).asInstanceOf[EditText].getText.toString
+    val ort = findViewById(R.id.eT_anOrt).asInstanceOf[EditText].getText.toString
     val bundesland = findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val rb_auslandJa = findViewById(R.id.rB_anAuslandJa).asInstanceOf[RadioButton]
     val rb_HWSJa = findViewById(R.id.rB_anHWSJa).asInstanceOf[RadioButton]
     val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
     val hws = if (rb_HWSJa.isChecked == true) "ja" else "nein"
-    val nameUG = checkText(findViewById(R.id.eT_anNameUG).asInstanceOf[EditText].getText.toString)
+    val nameUG = findViewById(R.id.eT_anNameUG).asInstanceOf[EditText].getText.toString
 
     val anmeldeDaten: AnmeldeDaten = AnmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland, hws, nameUG)
 
@@ -106,18 +107,18 @@ class AnmeldungActivity extends Activity{
   }
 
   def updateData(view: View) = {
-    val strasse = checkText(findViewById(R.id.eT_anStraße).asInstanceOf[EditText].getText.toString)
-    val hausnummer = checkNumber(findViewById(R.id.eT_anHausNr).asInstanceOf[EditText].getText.toString)
-    val stiege = checkNumber(findViewById(R.id.eT_anStiege).asInstanceOf[EditText].getText.toString)
-    val tuer = checkNumber(findViewById(R.id.eT_anTuer).asInstanceOf[EditText].getText.toString)
-    val plz = checkPlz(findViewById(R.id.eT_anPLZ).asInstanceOf[EditText].getText.toString)
-    val ort = checkText(findViewById(R.id.eT_anOrt).asInstanceOf[EditText].getText.toString)
+    val strasse = findViewById(R.id.eT_anStraße).asInstanceOf[EditText].getText.toString
+    val hausnummer = findViewById(R.id.eT_anHausNr).asInstanceOf[EditText].getText.toString
+    val stiege = findViewById(R.id.eT_anStiege).asInstanceOf[EditText].getText.toString
+    val tuer = findViewById(R.id.eT_anTuer).asInstanceOf[EditText].getText.toString
+    val plz = findViewById(R.id.eT_anPLZ).asInstanceOf[EditText].getText.toString
+    val ort = findViewById(R.id.eT_anOrt).asInstanceOf[EditText].getText.toString
     val bundesland = findViewById(R.id.s_anBundesland).asInstanceOf[Spinner].getSelectedItem().toString()
     val rb_auslandJa = findViewById(R.id.rB_anAuslandJa).asInstanceOf[RadioButton]
     val rb_HWSJa = findViewById(R.id.rB_anHWSJa).asInstanceOf[RadioButton]
     val ausland = if (rb_auslandJa.isChecked == true) "ja" else "nein"
     val hws = if (rb_HWSJa.isChecked == true) "ja" else "nein"
-    val nameUG = checkText(findViewById(R.id.eT_anNameUG).asInstanceOf[EditText].getText.toString)
+    val nameUG = findViewById(R.id.eT_anNameUG).asInstanceOf[EditText].getText.toString
 
     val anmeldeDaten: AnmeldeDaten = AnmeldeDaten(person_id, strasse, hausnummer, stiege, tuer, plz, ort, bundesland, ausland, hws, nameUG)
 
@@ -159,9 +160,9 @@ class AnmeldungActivity extends Activity{
       spinner.setAdapter(adapter)
     }
   }
-
+/*
   def checkText(name: String): String = {
-    val check = ".*\d.*".r
+    val check: Regex = ".*\d.*".r
     name match {
       case `check` => name.replace("1","i").replace("2","z").replace("3","e").replace("4","a").replace("5","s").replace("6","g").replace("7","t").replace("8","b").replace("9","p").replace("0","o")
       case _ => name
@@ -169,7 +170,7 @@ class AnmeldungActivity extends Activity{
   }
 
   def checkNumber(number: String): String = {
-    val check = ".*\s.*".r
+    val check: Regex = ".*\s.*".r
     number match {
       case `check` => ""
       case _ => number
@@ -177,10 +178,11 @@ class AnmeldungActivity extends Activity{
   }
 
   def checkPlz(plz: String) = {
-    val check = "\d\d\d\d".r
+    val check: Regex = "\d\d\d\d".r
     plz match {
       case `check` => plz
       case _ => ""
     }
   }
+  */
 }

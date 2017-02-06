@@ -6,6 +6,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.view.View
 import android.widget._
+import scala.util.matching.Regex
 
 /**
   * Created by Martin on 15.01.2017.
@@ -131,15 +132,14 @@ class PersoenlicheDatenActivity extends Activity{
   }
 
   def saveData(view:View): Unit = {
-
-    val nachname = checkText(findViewById(R.id.eT_nachname).asInstanceOf[EditText].getText.toString)
-    val vorname = checkText(findViewById(R.id.eT_vorname).asInstanceOf[EditText].getText.toString)
-    val nachnameVorher = checkText(findViewById(R.id.eT_nachnameVorher).asInstanceOf[EditText].getText.toString)
+    val nachname = findViewById(R.id.eT_nachname).asInstanceOf[EditText].getText.toString
+    val vorname = findViewById(R.id.eT_vorname).asInstanceOf[EditText].getText.toString
+    val nachnameVorher = findViewById(R.id.eT_nachnameVorher).asInstanceOf[EditText].getText.toString
     val gebTag = findViewById(R.id.s_gebTag).asInstanceOf[Spinner].getSelectedItem.toString
     val gebMonat = findViewById(R.id.s_gebMonat).asInstanceOf[Spinner].getSelectedItem.toString
     val gebJahr = findViewById(R.id.s_gebJahr).asInstanceOf[Spinner].getSelectedItem.toString
     val gebDatum = checkDate(gebTag, gebMonat, gebJahr)
-    val gebOrt = checkText(findViewById(R.id.eT_gebOrt).asInstanceOf[EditText].getText.toString)
+    val gebOrt = findViewById(R.id.eT_gebOrt).asInstanceOf[EditText].getText.toString
     val rb_m = findViewById(R.id.rB_m).asInstanceOf[RadioButton]
     val geschlecht = if (rb_m.isChecked == true) "m" else "w"
     val religion = findViewById(R.id.s_religion).asInstanceOf[Spinner].getSelectedItem.toString
@@ -176,14 +176,14 @@ class PersoenlicheDatenActivity extends Activity{
   }
 
   def updateData(view: View): Unit = {
-    val nachname = checkText(findViewById(R.id.eT_nachname).asInstanceOf[EditText].getText.toString)
-    val vorname = checkText(findViewById(R.id.eT_vorname).asInstanceOf[EditText].getText.toString)
-    val nachnameVorher = checkText(findViewById(R.id.eT_nachnameVorher).asInstanceOf[EditText].getText.toString)
+    val nachname = findViewById(R.id.eT_nachname).asInstanceOf[EditText].getText.toString
+    val vorname = findViewById(R.id.eT_vorname).asInstanceOf[EditText].getText.toString
+    val nachnameVorher = findViewById(R.id.eT_nachnameVorher).asInstanceOf[EditText].getText.toString
     val gebTag = findViewById(R.id.s_gebTag).asInstanceOf[Spinner].getSelectedItem.toString
     val gebMonat = findViewById(R.id.s_gebMonat).asInstanceOf[Spinner].getSelectedItem.toString
     val gebJahr = findViewById(R.id.s_gebJahr).asInstanceOf[Spinner].getSelectedItem.toString
     val gebDatum = checkDate(gebTag, gebMonat, gebJahr)
-    val gebOrt = checkText(findViewById(R.id.eT_gebOrt).asInstanceOf[EditText].getText.toString)
+    val gebOrt = findViewById(R.id.eT_gebOrt).asInstanceOf[EditText].getText.toString
     val rb_m = findViewById(R.id.rB_m).asInstanceOf[RadioButton]
     val geschlecht = if (rb_m.isChecked == true) "m" else "w"
     val religion = findViewById(R.id.s_religion).asInstanceOf[Spinner].getSelectedItem.toString
@@ -270,12 +270,13 @@ class PersoenlicheDatenActivity extends Activity{
     }
     date
   }
-
+/*
   def checkText(name: String): String = {
-    val check = ".*\d.*".r
+    val check: Regex = ".*\d.*".r
     name match {
       case `check` => name.replace("1","i").replace("2","z").replace("3","e").replace("4","a").replace("5","s").replace("6","g").replace("7","t").replace("8","b").replace("9","p").replace("0","o")
       case _ => name
     }
   }
+  */
 }
