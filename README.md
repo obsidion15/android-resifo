@@ -13,10 +13,11 @@
 
 <h2>Getting started - Its easy!</h2>
 <p>Just enter your data digitally. Wherever, whenever you want</p>
-Screenshots
+<img src="project_management/1.gif">
+<img src="project_management/2.gif" align="right">
 
 <h1>Prerequisites</h1>
-<p>An android smartphone with at least Android 5.1.</p>
+<p>An android smartphone with at least Android 4.0.</p>
 
 <h1>FAQ</h1>
 <p><span style="color:red;"><b>ATTENTION! This App was developed for a project at Fachhochschule Joanneum Graz. It does not actually send your data to the austrian authoritys, but only saves it locally on your device!</b></span></p>
@@ -24,7 +25,8 @@ Screenshots
 <p>Yes that's possbile. Just enter the data of all the persons successively. You will find everything you entered in the menu under "Bearbeiten".</p>
 <h4>Is this app an official app from the austrian government?</h4>
 <p>No! This app was developed during a project at FH Joanneum GmbH Graz. It is not official and should not accually be used to register a new accomodation! You can find more information about the programmers in the <a href="Team.md">Team.md</a> file.</p>
-
+<h4>Will my personal data like adress and stuff be stored persistently?</h4>
+<p>Yes! We use a SQLite database to store your data persistently on your device.</p>
 
 
 <h1>LICENCE</h1>
