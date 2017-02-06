@@ -5,17 +5,19 @@
 
 <h2>Tired of all the bureaucratic paper work when changing your residence?</h2>
 <img src="project_management/meldezettel.gif">
+<br>
 <b>Not any longer with the KAreg Meldezettel App!</b>
 
 <h2>Why?</h2>
-<p>When moving to Austria or changing the place of your residence you are legally bound to inform two austrian authoritys of your relocation. First the municipal office of your old city, which is called "Abmelden", second the municipal office of your new city which is called "Anmelden. The deadline to do this is <b>only three days</b> from the day you move into your new accomodation! We help you save time by providing an easy way to do so.</p>
+<p>When moving to Austria or changing the place of your residence you are legally bound to inform two austrian authoritys of your relocation. First the municipal office of your old city, which is called "Abmelden", second the municipal office of your new city which is called "Anmelden. The deadline to do so is <b>only three days</b> from the day you move into your new accomodation! We help you save time by providing an easy way.</p>
 
 <h2>Getting started - Its easy!</h2>
 <p>Just enter your data digitally. Wherever, whenever you want</p>
-Screenshots
+<img src="project_management/1.gif">
+<img src="project_management/2.gif" align="right">
 
 <h1>Prerequisites</h1>
-<p>Text</p>
+<p>An android smartphone with at least Android 4.0.</p>
 
 <h1>FAQ</h1>
 <p><span style="color:red;"><b>ATTENTION! This App was developed for a project at Fachhochschule Joanneum Graz. It does not actually send your data to the austrian authoritys, but only saves it locally on your device!</b></span></p>
@@ -23,18 +25,16 @@ Screenshots
 <p>Yes that's possbile. Just enter the data of all the persons successively. You will find everything you entered in the menu under "Bearbeiten".</p>
 <h4>Is this app an official app from the austrian government?</h4>
 <p>No! This app was developed during a project at FH Joanneum GmbH Graz. It is not official and should not accually be used to register a new accomodation! You can find more information about the programmers in the <a href="Team.md">Team.md</a> file.</p>
+<h4>Will my personal data like adress and stuff be stored persistently?</h4>
+<p>Yes! We use a SQLite database to store your data persistently on your device.</p>
 
-<h4>Frage</h4>
-<p>Text</p>
-HINWEIS das Daten nicht tatsächlich abgeschickt werden
-Can man sich auch abmelden
 
 <h1>LICENCE</h1>
-<p>You can find the license at <a href="LICENSE.txt">LICENSE.txt</a>.</p>
+<p>You can find the license in the <a href="LICENSE.txt">LICENSE.txt</a> file.</p>
 
 <h1>Contributors</h1>
 <p>You can find the contributors in the <a href="Team.md">Team.md</a> file.</p>
 
 <h1>Releases</h1>
-<p>Text</p>
+<p>06.02.2017 - Version 1.0</p>
 
